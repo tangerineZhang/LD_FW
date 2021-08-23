@@ -1,0 +1,388 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+
+<style>
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }
+
+    .layui-form-item .layui-inline {
+        margin-bottom: 0px;
+        margin-right: 10px;
+    }
+
+    .layui-form-select dl dd.layui-this {
+        background-color: #409EFF !important;
+        color: #fff !important;
+    }
+    /*.site-demo-button div {
+        margin: 20px 30px 10px;
+    }
+
+    .layui-elem-field legend {
+        margin-left: 20px;
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }*/
+
+    .layui-form-label {
+        float: left;
+        display: block;
+        padding: 9px 15px;
+        font-weight: 400;
+        line-height: 18px;
+        width: 120px;
+        text-align: right;
+    }
+    em {
+        color: red;
+    }
+    .layui-input-block {
+        margin-left: 150px;
+        min-height: 36px;
+    }
+
+
+    /*.layui-form-item {
+        margin-bottom: 15px;
+        clear: both;
+        border-bottom: solid 1px #dedede;
+        *zoom: 1;
+    }*/
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">跟进记录</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">跟进类型</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="LawType" lay-verify="title" autocomplete="off" value="案件常规跟进" disabled class="layui-input layui-disabled layui-bg-gray" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">跟进时间<em>*</em></label>
+                        <div class="layui-input-block">
+                            <input type="text" lay-verify="required" class="layui-input test-item" name="FollowUpDate" id="test1" placeholder="yyyy-MM-dd" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">跟进人</label>
+                        <div class="layui-input-block"> 
+                            <input type="text" name="PersonFollowUp" lay-verify="title" autocomplete="off" disabled value="@ViewData["Username"]" class="layui-input layui-disabled layui-bg-gray" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">审理阶段<em>*</em></label>
+                    <div class="layui-input-block" style="width:191px">
+                        <select name="TrialState" id="Trstau" lay-filter="xmTrstau">
+                            <option value="">请选择</option>
+                            <option value="一审">一审</option>
+                            <option value="二审">二审</option>
+                            <option value="再审">再审</option>
+                            @*<option value="重复一审">重复一审</option>*@
+                            <option value="执行">执行</option>
+                            <option value="发回重审一审">发回重审一审</option>
+                            <option value="重审二审">重审二审</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">案件状态<em>*</em></label>
+                    <div class="layui-input-block" style="width:191px">
+                        <select name="FUStatus" id="stau" lay-verify="required" lay-filter="xmFilter">
+                            <option value=""></option>
+                        </select>
+
+                        @*<select name="FUStatus">
+                    <option value="">请选择</option>
+                    <option value="A">正常跟进</option>
+                    <option value="B">已受理未开庭</option>
+                    <option value="C">已开庭未判决</option>
+                    <option value="C">已判决/已调解</option>
+                    <option value="C">已申请强制执行</option>
+                    <option value="C">已执行和解</option>
+                    <option value="C">结案</option>
+                </select>*@
+                    </div>
+                </div>
+                @*<div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">调解金额</label>
+                <div class="layui-input-block">
+                    <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-inline">
+                <label class="layui-form-label">和解金额 </label>
+                <div class="layui-input-block">
+                    <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                </div>
+            </div>
+        </div>*@
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">跟进情况<em>*</em></label>
+                    <div class="layui-input-block">
+                        <textarea name="FollowUpInfo" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">下一步举措</label>
+                    <div class="layui-input-block">
+                        <textarea name="NextMassage" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">下一次跟进时间<em>*</em></label>
+                        @*<div class="layui-input-block">
+                    <input type="text" class="layui-input" name="Time1" id="test2" placeholder="yyyy-MM-dd" lay-key="1" style="width:191px">
+                </div>*@
+                        <div class="layui-input-block">
+                            <input type="text" lay-verify="required" disabled class="layui-input layui-disabled layui-bg-gray" name="NextDate" id="test2" placeholder="yyyy-MM-dd" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-layout-admin">
+                    <div class="layui-input-block">
+                        <div class="layui-footer" style="left: 0;">
+                            <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="component-form-demo1"> <i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/js/MyJS.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+
+        //同时绑定页面多个日期控件
+        lay('.test-item').each(function () {
+            laydate.render({
+                elem: this
+                , trigger: 'click'
+                , format: 'yyyy-MM-dd'
+            });
+        });
+        var myDate = new Date();
+        var a = new Date((+myDate) + 7 * 24 * 3600 * 1000)
+        statime = a.toLocaleDateString().replaceAll("/", "-");
+       
+        //日期时间范围选择
+        laydate.render({
+            elem: '#test2'
+            , format: 'yyyy-MM-dd'
+            , value: statime
+        });
+     
+        //获取审理阶段下拉框中的值
+        form.on('select(xmTrstau)', function (data) {
+            $('#xmTrstau').trigger('change');
+            //alert(data.elem[data.elem.selectedIndex].text)
+            myfunction(data.elem[data.elem.selectedIndex].text);
+
+            form.render('select');
+        });
+
+        function myfunction(obj) {
+            //根据审理类型展现不同下拉框
+            $('#stau').empty();
+            switch (obj) {
+                case "一审":
+                    
+                    $('#stau').append('<option value="待立案">待立案</option>');
+                    $('#stau').append('<option value="已受理未缴费">已受理未缴费</option>');
+                    $('#stau').append('<option value="已缴费未开庭">已缴费未开庭</option>');
+                    $('#stau').append('<option value="已开庭未裁判">已开庭未裁判</option>');
+                    $('#stau').append('<option value="已裁判未生效">已裁判未生效</option>');
+                    $('#stau').append('<option value="已上诉">已上诉</option>');
+                    $('#stau').append('<option value="已生效">已生效</option>');
+                    break;
+                case "二审":
+                    $('#stau').append('<option value="待立案">待立案</option>');
+                    $('#stau').append('<option value="已受理未缴费">已受理未缴费</option>');
+                    $('#stau').append('<option value="已缴费未开庭">已缴费未开庭</option>');
+                    $('#stau').append('<option value="已开庭未裁判">已开庭未裁判</option>');
+                    $('#stau').append('<option value="已裁判未生效">已裁判未生效</option>');
+                    $('#stau').append('<option value="已生效">已生效</option>');
+                    break;
+                case "再审":
+                    $('#stau').append('<option value="已申请">已申请</option>');
+                    $('#stau').append('<option value="已缴费未开庭">已缴费未开庭</option>');
+                    $('#stau').append('<option value="已开庭未裁判">已开庭未裁判</option>');
+                    $('#stau').append('<option value="已裁判未生效">已裁判未生效</option>');
+                    $('#stau').append('<option value="已生效">已生效</option>');
+                    break;
+                //case "重复一审":
+                //    $('#stau').append('<option value="待立案">待立案</option>');
+                //    $('#stau').append('<option value="已立案未开庭">已立案未开庭</option>');
+                //    $('#stau').append('<option value="已开庭未裁判">已开庭未裁判</option>');
+                //    $('#stau').append('<option value="已裁判未生效">已裁判未生效</option>');
+                //    $('#stau').append('<option value="已上诉">已上诉</option>');
+                //    $('#stau').append('<option value="已生效">已生效</option>');
+                //    break;
+                case "执行":
+                    $('#stau').append('<option value="待立案">待立案</option>');
+                    $('#stau').append('<option value="已申请强制执行">已申请强制执行</option>');
+                    $('#stau').append('<option value="已进行网络查控">已进行网络查控</option>');
+                    $('#stau').append('<option value="执行中">执行中</option>');
+                    $('#stau').append('<option value="执行和解">执行和解</option>');
+                    $('#stau').append('<option value="执行终结">执行终结</option>');
+                    $('#stau').append('<option value="终结本次执行">终结本次执行</option>');
+                    break;
+                case "发回重审一审":
+                    $('#stau').append('<option value="待立案">待立案</option>');
+                    $('#stau').append('<option value="已受理">已受理</option>');
+
+                    $('#stau').append('<option value="已开庭未裁判">已开庭未裁判</option>');
+                    $('#stau').append('<option value="已裁判未生效">已裁判未生效</option>');
+                    $('#stau').append('<option value="已上诉">已上诉</option>');
+                    $('#stau').append('<option value="已生效">已生效</option>');
+                    break;
+                case "重审二审":
+                    $('#stau').append('<option value="待立案">待立案</option>');
+                    $('#stau').append('<option value="已受理未开庭">已受理未开庭</option>');
+                    $('#stau').append('<option value="已开庭未裁判">已开庭未裁判</option>');
+                    $('#stau').append('<option value="已裁判未生效">已裁判未生效</option>');
+                    $('#stau').append('<option value="已生效">已生效</option>');
+                    break;
+
+            }
+
+                
+                    layui.form.render("select");
+                    //重新渲染 固定写法
+   
+
+        }
+        
+       
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        //form.verify({
+        //    title: function (value) {
+        //        if (value.length < 5) {
+        //            return '标题至少得5个字符啊';
+        //        }
+        //    }
+        //    , pass: [
+        //        /^[\S]{6,12}$/
+        //        , '密码必须6到12位，且不能出现空格'
+        //    ]
+        //    , content: function (value) {
+        //        layedit.sync(editIndex);
+        //    }
+        //});
+
+
+        //监听提交
+        form.on('submit(component-form-demo1)', function (data) {
+            //layer.alert(JSON.stringify(data.field), {
+            //    title: '最终的提交信息'
+            //})
+            console.log(data.field);
+            //var id = getUrlParam("id");  //获取url中的id
+            //alert(id);
+
+            //   document.getElementById("iframe").contentWindow.loadData($, laydate, data.id);
+
+
+
+            $.post('/Law/AddFollowUp', { followUp: JSON.stringify(data.field) }, function (data) {
+                if (data == 1) {
+                    //alert('1');
+                    layer.msg('操作成功!', { icon: 1, time: 2000 });
+                    setTimeout(function () {
+                        layer.close(layer.index);
+                        window.parent.location.reload();
+                    }, 2000);
+                    //var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+                    //parent.layer.close(index); //再执行关闭
+                }
+                else {
+                    layer.msg('操作失败!', { icon: 2, time: 2000 });
+                }
+            });
+
+
+            // parent.layui.admin.events.closeThisTabs();
+
+            return false;
+        });
+
+
+    });
+</script>
+
+@*<script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            //常规用法
+            laydate.render({
+                elem: '#test1'
+            });
+            laydate.render({
+                elem: '#test2'
+            });
+
+            //国际版
+
+        });
+    </script>*@
+
+

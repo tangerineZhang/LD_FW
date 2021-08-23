@@ -1,0 +1,1711 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<style>
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #009688;
+        border-radius: 0 2px 2px 0;
+    }
+
+    .layui-form-item {
+        margin-bottom: 2px;
+        clear: both;
+    }
+
+        .layui-form-item .layui-inline {
+            margin-bottom: 0px;
+            margin-right: 10px;
+        }
+
+    .layui-form-select dl dd.layui-this {
+        background-color: #409EFF !important;
+        color: #fff !important;
+    }
+    /*.site-demo-button div {
+        margin: 20px 30px 10px;
+    }
+
+    .layui-elem-field legend {
+        margin-left: 20px;
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }*/
+
+    .layui-form-label {
+        float: left;
+        display: block;
+        padding: 9px 14px;
+        font-weight: 400;
+        line-height: 18px;
+        border: 1px solid;
+        border-color: #e6e6e6;
+        width: 160px;
+        text-align: right;
+        background-color: #FBFBFB;
+        font-weight: bold;
+    }
+
+    .layui-input-block {
+        margin-left: 190px;
+        min-height: 36px;
+    }
+
+    .layui-input, .layui-select, .layui-textarea {
+        height: 38px;
+        line-height: 1.3;
+        line-height: 38px\9;
+        /*border-width: 0px;
+        border-bottom-width: 1px;*/
+        border-style: solid;
+        background-color: #fff;
+        border-radius: 2px;
+    }
+
+    .layui-form-onswitch {
+        border-color: #5FB878;
+        background-color: #5FB878;
+    }
+
+    .layui-form-switch {
+        position: relative;
+        height: 22px;
+        line-height: 22px;
+        min-width: 35px;
+        padding: 0 5px;
+        margin-top: 8px;
+        margin-left: 8px;
+        border: 1px solid #d2d2d2;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: .1s linear;
+    }
+
+    /*table*/
+    /*这个是让table里的下拉框不被遮挡 start*/
+    /*.layui-table-cell {
+        overflow: visible !important;
+    }
+
+    .layui-table-box {
+        overflow: visible;
+    }
+
+    .layui-table-body {
+        overflow: visible;
+    }
+
+    td .layui-form-select {
+        margin-top: -10px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }*/
+    /*这个是让table里的下拉框不被遮挡 end*/
+
+
+    /*您可以将下列样式写入自己的样式表中*/
+    .childBody {
+        padding: 15px;
+    }
+    /*layui 元素样式改写*/
+    .layui-btn-sm {
+        line-height: normal;
+        font-size: 12.5px;
+    }
+    /*.layui-table-view .layui-table-body {
+        min-height: 256px;
+    }*/
+    .layui-table-cell .layui-input.layui-unselect {
+        height: 30px;
+        line-height: 30px;
+    }
+    /*设置 layui 表格中单元格内容溢出可见样式*/
+    .table-overlay .layui-table-view,
+    .table-overlay .layui-table-box,
+    .table-overlay .layui-table-body {
+        overflow: visible;
+    }
+
+    .table-overlay .layui-table-cell {
+        height: auto;
+        overflow: visible;
+    }
+
+    .layui-table-cell {
+        overflow: visible !important;
+    }
+    /*文本对齐方式*/
+    .text-center {
+        text-align: center;
+    }
+    /*upload*/
+    .layui-upload-list {
+        margin: 0px 0px 10px 0px;
+    }
+
+    .layui-card-body .layui-table {
+        margin: 0px 0;
+    }
+    /*upload end*/
+    /*table end*/
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">基本信息</div>
+        <form class="layui-form" action="" lay-filter="component-form-group">
+            <div class="layui-card-body" style="padding: 15px;">
+
+                <div class="layui-form-item">
+
+
+                    <label class="layui-form-label">案件名称</label>
+
+                    <div class="layui-input-block">
+                        <input type="text" name="LawName" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+
+
+
+
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">案号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="CaseNo" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">案件等级</label>
+                        <div class="layui-input-block">
+                            <select name="Grade" id="gra" lay-verify="required" lay-filter="xmFilter">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        @*<label class="layui-form-label">案号</label>*@
+                        <div class="layui-input-block">
+
+                            @*<input type="text" name="CaseNo" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">*@
+                        </div>
+                    </div>
+
+
+
+                    <div class="layui-form-item">
+
+
+                        <div class="layui-col-md4">
+                            <label class="layui-form-label">代理律师</label>
+                            <div class="layui-input-block">
+                                <div class="xm-select-demo" name="Llawyer" id="demo9">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <label class="layui-form-label">代理律所</label>
+                            <div class="layui-input-block">
+                                <div class="xm-select-demo" name="LawFirm" id="demo8">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+
+                            <label class="layui-form-label">诉讼法院</label>
+                            <div class="layui-input-block">
+
+                                <input type="text" name="Court" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item">
+                        <div class="layui-col-md4">
+                            <label class="layui-form-label">诉讼类型</label>
+                            <div class="layui-input-block">
+                                <select name="LawsuitType" id="suit" lay-verify="required" lay-filter="xmFilter1">
+                                    <option value="">请选择</option>
+                                    <option value="主诉">主诉</option>
+                                    <option value="被诉">被诉</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <label class="layui-form-label">案件类型</label>
+                            <div class="layui-input-block">
+                                <select name="LawType" id="type" lay-verify="required" lay-filter="xmFilter">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <label class="layui-form-label">所属事业部</label>
+                            <div class="layui-input-block">
+                                <select name="Department" id="quiz" lay-verify="required" lay-filter="xmFilter">
+                                    <option value=""></option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-col-md4">
+                            <label class="layui-form-label">原告</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="Plaintiff" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <label class="layui-form-label">被告</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="Defendant" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                            </div>
+                        </div>
+                        <div class="layui-col-md4">
+                            <label class="layui-form-label">第3人</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="TheThird" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="layui-inline">
+                            <label class="layui-form-label">案号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="CaseNo" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input" style="width:191px">
+                            </div>
+                        </div>*@
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">立案时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input test-item" name="FilingDate" id="test1" placeholder="yyyy-MM-dd">
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">结案时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input test-item" name="ClosingDate" id="test2" placeholder="yyyy-MM-dd">
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">当前状态</label>
+                        <div class="layui-input-block">
+                            <select name="LawStatus" id="stau" lay-verify="required" lay-filter="xmFilter">
+                                <option value=""></option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="layui-card-header">案情描述</div>
+            <div class="layui-card-body" style="padding: 15px;">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">案情简介</label>
+                    <div class="layui-input-block">
+                        <textarea name="Describe" placeholder="请输入内容" class="layui-textarea" style="border-width: 1px;"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">诉讼请求</label>
+                    <div class="layui-input-block">
+                        <textarea name="Claims" placeholder="请输入内容" class="layui-textarea" style="border-width: 1px;"></textarea>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="layui-card-header">诉讼保全信息</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                @*<form class="layui-form" action="" lay-filter="component-form-group">*@
+
+                <div class="layui-form-item">
+                    <div id="toolbar">
+                        <div>
+                            <button type="button" class="layui-btn layui-btn-sm" data-type="addRow" title="添加一行">
+                                <i class="layui-icon layui-icon-add-1"></i> 添加一行
+                            </button>
+                        </div>
+                    </div>
+                    <div id="tableRes" class="table-overlay">
+                        <table id="dataTable" lay-filter="dataTable" class="layui-hide"></table>
+                    </div>
+                </div>
+                @*</form>*@
+            </div>
+            @*<div class="layui-card-header">查封信息</div>
+                <div class="layui-card-body" style="padding: 15px;">
+                    <div class="layui-form-item">
+                        <div id="toolbar">
+                            <div>
+                                <button type="button" class="layui-btn layui-btn-sm" data-type="addRowSeizure" title="添加一行">
+                                    <i class="layui-icon layui-icon-add-1"></i> 添加一行
+                                </button>
+                            </div>
+                        </div>
+                        <div id="tableRes" class="table-overlay">
+                            <table id="SeizureTable" lay-filter="SeizureTable" class="layui-hide"></table>
+                        </div>
+                    </div>
+                </div>*@
+            <div class="layui-card-header">涉案金额（单位：万元）</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                @*<form class="layui-form" action="" lay-filter="component-form-group">*@
+                <div class="layui-form-item">
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">起诉金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="AmountInvolved" placeholder="￥" value="0" lay-verify="number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">法院判决/调节金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="Judgment" placeholder="￥" value="0" lay-verify="number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">是否纳入考核</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" checked="" name="IsAssess" lay-skin="switch" lay-filter="component-form-switchTest" lay-text="是|否"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>是</em><i></i></div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="layui-form-item" id="view1">
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">应回款金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="Receivables" placeholder="￥" value="0" lay-verify="number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">实际回款金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="ActualPayment" placeholder="￥" value="0" lay-verify="number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">风险敞口</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="RiskExposure" placeholder="￥" value="0" lay-verify="number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="layui-form-item" id="view2">
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">应付未付金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="AmountueDU" placeholder="￥" value="0" lay-verify="number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">应止损金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="SStopLoss" placeholder="￥" value="0" lay-verify="number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">已止损金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="AStopLoss" placeholder="￥" value="0" lay-verify="number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+
+
+
+                    @*<div class="layui-inline">
+                            <label class="layui-form-label">止损率</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="StopLossRate" lay-verify="number" autocomplete="off" placeholder="请输入N%" class="layui-input" style="width:191px">
+                            </div>
+                        </div>*@
+                </div>
+
+                @*</form>*@
+            </div>
+            <div class="layui-card-header">诉讼费用（单位：万元）</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                @*<form class="layui-form" action="" lay-filter="component-form-group">*@
+                @*<div class="layui-form-item">
+                        <div class="layui-inline">
+                            <label class="layui-form-label">诉讼费用</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">缴纳时间</label>
+                            <div class="layui-input-block">
+                                <input type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd" lay-key="1" style="width:191px">
+                            </div>
+                        </div>
+                        <div class="layui-inline">
+                            <label class="layui-form-label">诉讼费用结清</label>
+                            <div class="layui-input-block">
+                                <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="component-form-switchTest" lay-text="是|否"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>是</em><i></i></div>
+                            </div>
+                        </div>
+                    </div>*@
+
+                <div class="layui-form-item">
+                    <div id="toolbar">
+                        <div>
+                            <button type="button" class="layui-btn layui-btn-sm" data-type="addRowLegalCosts" title="添加一行">
+                                <i class="layui-icon layui-icon-add-1"></i> 添加一行
+                            </button>
+                        </div>
+                    </div>
+                    <div id="tableRes" class="table-overlay">
+                        <table id="LegalCostsTable" lay-filter="LegalCostsTable" class="layui-hide"></table>
+                    </div>
+                </div>
+                @*</form>*@
+            </div>
+            <div class="layui-card-header">律师费用</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <div class="layui-form-item">
+                    <div id="toolbar">
+                        <div>
+                            <button type="button" class="layui-btn layui-btn-sm" data-type="addRowSeizure" title="添加一行">
+                                <i class="layui-icon layui-icon-add-1"></i> 添加一行
+                            </button>
+                        </div>
+                    </div>
+                    <div id="tableRes" class="table-overlay">
+                        <table id="SeizureTable" lay-filter="SeizureTable" class="layui-hide"></table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-card-header">解决方案及进度</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                @*<form class="layui-form" action="" lay-filter="component-form-group">*@
+                <div class="layui-form-item">
+                    <label class="layui-form-label">解决思路</label>
+                    <div class="layui-input-block">
+                        <textarea name="Solutions" placeholder="请输入内容" class="layui-textarea" style="border-width: 1px;"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">责任人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="PersonLiable" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">跟进人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="PersonFollowUp" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">跟进记录</label>
+                    <div class="layui-input-block">
+                        <textarea name="FollowUpRecord" placeholder="请输入内容" class="layui-textarea" style="border-width: 1px;"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">跟进时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input test-item" name="FollowUpDate" id="test111" placeholder="yyyy-MM-dd">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">下一次跟进时间</label>
+                    <div class="layui-input-block">
+                        <input type="text" class="layui-input test-item" name="NextDate" id="test222" placeholder="yyyy-MM-dd">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">当前进展</label>
+                    <div class="layui-input-block">
+                        <select name="FUStatus" id="stau1" lay-verify="required" lay-filter="xmFilter">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                @*</form>*@
+            </div>
+            <div class="layui-card-header">附件</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <div class="layui-form-item">
+                    <div class="layui-upload">
+                        <div id="toolbar">
+                            <div>
+                                <button type="button" class="layui-btn layui-btn-sm" id="testList"><i class="layui-icon layui-icon-add-1"></i>上传附件</button>
+                            </div>
+                        </div>
+                        <div class="layui-upload-list">
+                            <table class="layui-table" id="UploadTable" lay-filter="UploadTable">
+                                <thead>
+                                    <tr>
+                                        <th>文件名</th>
+                                        <th>大小</th>
+                                        <th>状态</th>
+                                        <th>类型</th>
+                                        <th>操作</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="demoList"></tbody>
+                            </table>
+                        </div>
+                        @*<button type="button" class="layui-btn" id="testListAction">开始上传</button>*@
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="layui-form-item layui-layout-admin">
+                <div class="layui-input-block">
+                    <div class="layui-footer" style="left: 0;">
+                        @*<button class="layui-btn layui-btn-normal" type="button"  id="testListAction"><i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>提交</button>*@
+                        @*<button class="layui-btn layui-btn-normal" style="display:none" id="testListAction1" lay-submit="" lay-filter="component-form-demo1"> <i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>提交</button>*@
+                        <button class="layui-btn layui-btn-normal" lay-submit="" id="testListAction1" lay-filter="component-form-demo1"> <i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>提交</button>
+                        <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="~/Scripts/xm-select/dist/xm-select.js"></script>
+@*<script src="~/Scripts/xm-select/dist/static/docs.js"></script>*@
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+
+
+
+<script>
+
+
+
+
+
+    ////绑定诉讼类型下拉框
+    //$.ajax({
+    //    url: '/Law/BangsuitType',
+    //    dataType: 'json',
+    //    type: 'get',
+    //    success: function (data) {
+    //        $.each(data, function (index, item) {
+    //            $('#suit').append(new Option(item.Name, item.id));// 下拉菜单里添加元素
+
+    //        });
+    //        layui.form.render("select");
+    //        //重新渲染 固定写法
+    //    }
+    //});
+
+    //var k = $('#suit option:selected').val();//选中的值
+    //alert(k);
+
+    //form.on('select(xmFilter1)', function (data) {
+    //    text = data.elem[data.elem.selectedIndex].text;
+    //    alert(data.elem.selectedIndex);
+    //    if (text == "主诉") {
+    //        var k = $("#suit option:selected").text();
+    //        alert(k);
+    //        if (k == "主诉") {
+    //            $("#view1").show();
+    //            $("#view2").hide();
+    //        }
+    //        else {
+    //            $("#view1").hide();
+    //            $("#view2").show();
+    //        }
+
+    //    }
+    //    else {
+    //        $("#view1").hide();
+    //        $("#view2").show();
+    //    }
+    //    console.log(data.elem); //得到select原始DOM对象
+    //    console.log(data.value); //得到被选中的值
+    //    console.log(data.othis); //得到美化后的DOM对象
+    //});
+
+</script>
+
+@*诉讼保全Table*@
+<script type="text/javascript">
+    $("#view1").hide();
+    $("#view2").hide();
+
+
+    //$(".suit").bind('change', function () {
+    //    var dataname = $(this).val();
+    //    alert(dataname);
+    //});
+
+    //准备视图对象
+    window.viewObj = {
+        tbData: [{
+            tempId: new Date().valueOf(),
+            Applicant: null,
+            Respondent: null,
+            LPCourt: null,
+            LPDate: null,
+            PCost: null,
+            PInformation: null
+        }],
+        //SeizuretbData: [{
+        //    tempId: new Date().valueOf(),
+        //    IsSeizureID: 0,
+        //    SCost: null,
+        //    SInformation: null
+        //}],
+        LegalCoststbData: [{
+            tempId: new Date().valueOf(),
+            LCType: null,
+            LegalCosts: null,
+            LCPaymentDate: null,
+        }],
+        SeizuretbData: [{
+            tempId: new Date().valueOf(),
+            LawyerType: null,
+            AttorneyFees: null,
+            LawyerPaymentDate: null
+        }],
+        typeData: [
+            { id: 1, name: '传票', },
+            { id: 2, name: '起诉状' },
+            { id: 3, name: '证据材料' },
+            { id: 4, name: '其他' }
+
+        ],
+        renderSelectOptions: function (data, settings) {
+            settings = settings || {};
+            var valueField = settings.valueField || 'value',
+                textField = settings.textField || 'text',
+                selectedValue = settings.selectedValue || "";
+            var html = [];
+            for (var i = 0, item; i < data.length; i++) {
+                item = data[i];
+                html.push('<option value="');
+                html.push(item[valueField]);
+                html.push('"');
+                if (selectedValue && item[valueField] == selectedValue) {
+                    html.push(' selected="selected"');
+                }
+                html.push('>');
+                html.push(item[textField]);
+                html.push('</option>');
+            }
+            return html.join('');
+        }
+    };
+    var fileadd = [];
+
+    var number = 0;
+
+    var stype = 0;
+    $(document).ready(function () {
+
+        layui.use(['jquery', 'layer', 'form', 'upload'], function () {
+            var $ = layui.$, table = layui.table, form = layui.form, layer = layui.layer, laydate = layui.laydate, upload = layui.upload;
+            //附件上传
+            //多文件列表示例
+
+            var demoListView = $('#demoList')
+                , uploadListIns = upload.render({
+                    elem: '#testList'
+                    , url: '/Law/uploadfile' //改成您自己的上传接口
+                    , accept: 'file'
+                    , multiple: true
+                    , auto: false
+                    , bindAction: '#testListAction1'
+                    , choose: function (obj) {
+                        var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                        //读取本地文件
+                        obj.preview(function (index, file, result) {
+                            var field = $(this).data('field');
+                            var tr = $(['<tr id="upload-' + index + '">'
+                                , '<td>' + file.name + '</td>'
+                                , '<td>' + (file.size / 1024).toFixed(1) + 'kb</td>'
+                                , '<td>等待上传</td>'
+                                , '<td>' + SelectFileType(field) + '</td>'
+                                , '<td>'
+                                , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                                , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                                , '</td>'
+                                , '</tr>'].join(''));
+                            number++;
+                            //单个重传
+                            tr.find('.demo-reload').on('click', function () {
+                                obj.upload(index, file);
+                            });
+
+                            //删除
+                            tr.find('.demo-delete').on('click', function () {
+                                delete files[index]; //删除对应的文件
+                                tr.remove();
+
+                                Array.prototype.remove = function (dx) {
+
+                                    if (isNaN(dx) || dx > this.length) {
+                                        return false;
+                                    }
+                                    for (var i = 0, n = 0; i < this.length; i++) {
+                                        if (this[i] != this[dx]) {
+                                            this[n++] = this[i];
+                                        }
+                                    }
+                                    this.length -= 1;
+
+                                };
+                                fileadd.remove(number);
+                                console.log(fileadd + "1");
+                                number--;
+                                uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                            });
+
+                            demoListView.append(tr);
+                            form.render('select');
+                        });
+                    }
+                    , done: function (res, index, upload) {
+                        if (res.res == "success") { //上传成功
+
+                            var tr = demoListView.find('tr#upload-' + index)
+                                , tds = tr.children();
+                            tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                            console.log(res);
+                            fileadd.push(res);
+                            console.log(fileadd);
+                            // tds.eq(3).html(''); //清空操作
+                            return delete this.files[index]; //删除文件队列已经上传成功的文件
+                        }
+                        this.error(index, upload);
+                    }
+                    , allDone: function (obj) { //当文件全部被提交后，才触发
+                        layer.msg('上传成功');
+                        // form.on('submit(component-form-demo1)');
+                        $("#testListAction1").click();
+
+                        // return false;
+
+                    }
+                    , error: function (index, upload) {
+                        var tr = demoListView.find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                        tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+                    }
+                });
+
+            function SelectFileType(field) {
+                console.log(viewObj.typeData);
+                var options = viewObj.renderSelectOptions(viewObj.typeData, { valueField: "id", textField: "name", selectedValue: "" });
+                var selectBtn = '<div class="layui-table-cell  laytable-cell-1-type"><a lay-event="type"></a><select  lay-verify="required"  name="type" lay-filter="type"><option value="">必须选择一个分类</option>' + options + '</select>';
+                //  selectBtn += '<div class="layui-unselect layui-form-select"><div class="layui-select-title"><input  type="text" placeholder="请选择分类" value="分类二" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择分类</dd><dd lay-value="1" class="">分类一</dd><dd lay-value="2" class="layui-this">分类二</dd><dd lay-value="3" class="">分类三</dd><dd lay-value="4" class="">分类四</dd></dl></div></div>';
+
+                return selectBtn;
+            }
+
+            //监听工具条
+            table.on('tool(UploadTable)', function (obj) {
+                var data = obj.data, event = obj.event, tr = obj.tr; //获得当前行 tr 的DOM对象;
+                console.log(data);
+
+                switch (event) {
+                    case "type":
+                        //console.log(data);
+
+                        var select = tr.find("select[name='type']");
+                        if (select) {
+                            var selectedVal = select.val();
+                            if (!selectedVal) {
+                                layer.tips("请选择一个分类", select.next('.layui-form-select'), { tips: [3, '#FF5722'] }); //吸附提示
+                            }
+                            console.log(selectedVal);
+                            $.extend(obj.data, { 'type': selectedVal });
+                            activeByType('updateRow', obj.data);	//更新行记录对象
+                        }
+                        break;
+                }
+            });
+
+            //监听select下拉选中事件
+            form.on('select(type)', function (data) {
+                //alert('监听select下拉选中事件');
+                var elem = data.elem; //得到select原始DOM对象
+                $(elem).prev("a[lay-event='type']").trigger("click");
+                stype += data.elem[data.elem.selectedIndex].text;
+                stype += ",";
+                //stype.push(data.elem[data.elem.selectedIndex].text);
+            });
+        });
+    });
+
+
+    //layui 模块化引用
+
+    layui.use(['jquery', 'table', 'layer', 'form', 'laydate', 'upload'], function () {
+        var $ = layui.$, table = layui.table, form = layui.form, layer = layui.layer, laydate = layui.laydate, upload = layui.upload;
+
+        form.render(null, 'component-form-group');
+        //同时绑定页面多个日期控件
+        lay('.test-item').each(function () {
+            laydate.render({
+                elem: this
+                , trigger: 'click'
+            });
+        });
+        //数据表格实例化
+        var tbWidth = $("#tableRes").width();
+        //诉讼保全信息
+        var layTableId = "dataTable";
+        var tableIns = table.render({
+            elem: '#dataTable',
+            id: layTableId,
+            data: viewObj.tbData,
+            width: tbWidth,
+            // page: true,
+            loading: true,
+            even: false, //不开启隔行背景
+            cols: [[
+                { title: '序号', type: 'numbers' },
+                { field: 'Applicant', title: '申请人', edit: 'text' },
+                { field: 'Respondent', title: '被申请人', edit: 'text' },
+                { field: 'LPCourt', title: '保全法院', edit: 'text' },
+                { field: 'LPDate', title: '保全日期', edit: 'text', edit: 'text', unresize: true, event: 'editLCPaymentDate' },
+                { field: 'PCost', title: '保全金额', edit: 'text' },
+                { field: 'PInformation', title: '保全资产信息', edit: 'text' },
+                {
+                    field: 'tempId', title: '操作', templet: function (d) {
+                        return '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del" lay-id="' + d.tempId + '"><i class="layui-icon layui-icon-delete"></i>移除</a>';
+                    }
+                }
+            ]],
+            done: function (res, curr, count) {
+                viewObj.tbData = res.data;
+            }
+        });
+
+
+        form.on('select(xmFilter1)', function (data) {
+            text = data.elem[data.elem.selectedIndex].text;
+            //  alert(data.elem.selectedIndex);
+            if (text == "主诉") {
+                var k = $("#suit option:selected").text();
+                //  alert(k);
+                if (k == "主诉") {
+                    $("#view1").show();
+                    $("#view2").hide();
+                }
+                else {
+                    $("#view1").hide();
+                    $("#view2").show();
+                }
+
+            }
+            else {
+                $("#view1").hide();
+                $("#view2").show();
+            }
+            console.log(data.elem); //得到select原始DOM对象
+            console.log(data.value); //得到被选中的值
+            console.log(data.othis); //得到美化后的DOM对象
+        });
+
+        form.on('select(xmFilter)', function (data) {
+            text = data.elem[data.elem.selectedIndex].text;
+            console.log(data.elem); //得到select原始DOM对象
+            console.log(data.value); //得到被选中的值
+            console.log(data.othis); //得到美化后的DOM对象
+        });
+
+        //诉讼费用
+        var layTableIdLegalCosts = "LegalCostsTable";
+        var tableInsLegalCosts = table.render({
+            elem: '#LegalCostsTable',
+            id: layTableIdLegalCosts,
+            data: viewObj.LegalCoststbData,
+            width: tbWidth,
+            // page: true,
+            loading: true,
+            even: false, //不开启隔行背景
+            cols: [[
+                { title: '序号', type: 'numbers' },
+                {
+                    field: 'LCType', title: '诉讼费用类型', edit: 'text'
+                },
+                { field: 'LegalCosts', title: '诉讼费用', edit: 'text' },
+                { field: 'LCPaymentDate', title: '诉讼费用支付时间', edit: 'text', unresize: true, event: 'editLCPaymentDate' },
+                {
+                    field: 'tempId', title: '操作', templet: function (d) {
+                        return '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delLegalCosts" lay-id="' + d.tempId + '"><i class="layui-icon layui-icon-delete"></i>移除</a>';
+                    }
+                }
+            ]],
+            done: function (res, curr, count) {
+                viewObj.SeizuretbData = res.data;
+
+            },
+        });
+
+
+
+
+        //律师费用
+        var layTableIdSeizure = "SeizureTable";
+        var tableInsSeizure = table.render({
+            elem: '#SeizureTable',
+            id: layTableIdSeizure,
+            data: viewObj.SeizuretbData,
+            width: tbWidth,
+            // page: true,
+            loading: true,
+            even: false, //不开启隔行背景
+            cols: [[
+                { title: '序号', type: 'numbers' },
+
+                { field: 'LawyerType', title: '律师费用类型', edit: 'text' },
+                { field: 'AttorneyFees', title: '律师费用', edit: 'text' },
+                { field: 'LawyerPaymentDate', title: '律师费用支付时间', edit: 'text', unresize: true, event: 'editLCPaymentDate' },
+                {
+                    field: 'tempId', title: '操作', templet: function (d) {
+                        return '<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="delSeizure" lay-id="' + d.tempId + '"><i class="layui-icon layui-icon-delete"></i>移除</a>';
+                    }
+                }
+            ]],
+            done: function (res, curr, count) {
+                viewObj.SeizuretbData = res.data;
+            }
+        });
+
+        //定义事件集合
+        var active = {
+            addRow: function () {	//添加一行诉讼保全
+                var oldData = table.cache[layTableId];
+                console.log(oldData);
+                var newRow = { tempId: new Date().valueOf(), IsPreservationID: 0, PCost: null, PInformation: null };
+                oldData.push(newRow);
+
+    
+
+                tableIns.reload({
+                    data: oldData
+                });
+            },
+            addRowSeizure: function () {	//添加一行诉讼费用
+                var oldData = table.cache[layTableIdSeizure];
+                console.log(oldData);
+                var newRow = { tempId: new Date().valueOf(), IsSeizureID: 0, SCost: null, SInformation: null };
+                oldData.push(newRow);
+                tableInsSeizure.reload({
+                    data: oldData
+
+                });
+
+            },
+            addRowLegalCosts: function () {	//添加一行律师费用
+                var oldData = table.cache[layTableIdLegalCosts];
+                // var nowdate = dateFormat('yyyy-MM-dd', new Date());
+                console.log(oldData);
+                var newRow = { tempId: new Date().valueOf(), LegalCosts: null, LCPaymentDate: null, IsSettledID: 0, AttorneyFees: null, LawyerPaymentDate: null };
+                oldData.push(newRow);
+                tableInsLegalCosts.reload({
+                    data: oldData
+                });
+            },
+            updateRow: function (obj) {
+                var oldData = table.cache[layTableId];
+                console.log(oldData);
+                for (var i = 0, row; i < oldData.length; i++) {
+                    row = oldData[i];
+                    if (row.tempId == obj.tempId) {
+                        $.extend(oldData[i], obj);
+                        return;
+                    }
+                }
+                tableIns.reload({
+                    data: oldData
+                });
+            },
+            updateRowSeizure: function (obj) {
+                var oldData = table.cache[layTableIdSeizure];
+                console.log(oldData);
+                for (var i = 0, row; i < oldData.length; i++) {
+                    row = oldData[i];
+                    if (row.tempId == obj.tempId) {
+                        $.extend(oldData[i], obj);
+                        return;
+                    }
+                }
+                tableInsSeizure.reload({
+                    data: oldData
+                });
+            },
+            updateRowLegalCosts: function (obj) {
+                var oldData = table.cache[layTableIdLegalCosts];
+                console.log(oldData);
+                for (var i = 0, row; i < oldData.length; i++) {
+                    row = oldData[i];
+                    if (row.tempId == obj.tempId) {
+                        $.extend(oldData[i], obj);
+                        return;
+                    }
+                }
+                tableInsLegalCosts.reload({
+                    data: oldData
+                });
+            },
+            removeEmptyTableCache: function () {
+                var oldData = table.cache[layTableId];
+                for (var i = 0, row; i < oldData.length; i++) {
+                    row = oldData[i];
+                    if (!row || !row.tempId) {
+                        oldData.splice(i, 1);    //删除一项
+                    }
+                    continue;
+                }
+                tableIns.reload({
+                    data: oldData
+                });
+            },
+            removeEmptyTableCacheSeizure: function () {
+                var oldData = table.cache[layTableIdSeizure];
+                for (var i = 0, row; i < oldData.length; i++) {
+                    row = oldData[i];
+                    if (!row || !row.tempId) {
+                        oldData.splice(i, 1);    //删除一项
+                    }
+                    continue;
+                }
+                tableInsSeizure.reload({
+                    data: oldData
+                });
+            },
+            removeEmptyTableCacheLegalCosts: function () {
+                var oldData = table.cache[layTableIdLegalCosts];
+                for (var i = 0, row; i < oldData.length; i++) {
+                    row = oldData[i];
+                    if (!row || !row.tempId) {
+                        oldData.splice(i, 1);    //删除一项
+                    }
+                    continue;
+                }
+                tableInsLegalCosts.reload({
+                    data: oldData
+                });
+            },
+            save: function () {
+                var oldData = table.cache[layTableId];
+                console.log(oldData);
+                for (var i = 0, row; i < oldData.length; i++) {
+                    row = oldData[i];
+                    if (!row.type) {
+                        layer.msg("检查每一行，请选择分类！", { icon: 5 }); //提示
+                        return;
+                    }
+                }
+                document.getElementById("jsonResult").innerHTML = JSON.stringify(table.cache[layTableId], null, 2);	//使用JSON.stringify() 格式化输出JSON字符串
+            }
+        }
+
+        //激活事件
+        var activeByType = function (type, arg) {
+            if (arguments.length === 2) {
+                active[type] ? active[type].call(this, arg) : '';
+            } else {
+                active[type] ? active[type].call(this) : '';
+            }
+        }
+
+        //注册按钮事件
+        $('.layui-btn[data-type]').on('click', function () {
+            var type = $(this).data('type');
+            activeByType(type);
+        });
+
+        //监听工具条
+        //诉讼保全信息
+        table.on('tool(dataTable)', function (obj) {
+            var data = obj.data, event = obj.event, tr = obj.tr; //获得当前行 tr 的DOM对象;
+            console.log(data);
+            switch (event) {
+                //case "type":
+                //    //console.log(data);
+                //    var select = tr.find("select[name='type']");
+                //    if (select) {
+                //        var selectedVal = select.val();
+                //        if (!selectedVal) {
+                //            layer.tips("请选择一个分类", select.next('.layui-form-select'), { tips: [3, '#FF5722'] }); //吸附提示
+                //        }
+                //        console.log(selectedVal);
+                //        $.extend(obj.data, { 'type': selectedVal });
+                //        activeByType('updateRow', obj.data);	//更新行记录对象
+                //    }
+                //    break;
+                case "state":
+                    var stateVal = tr.find("input[name='IsPreservationID']").prop('checked') ? 1 : 0;
+                    $.extend(obj.data, { 'IsPreservationID': stateVal })
+                    activeByType('updateRow', obj.data);	//更新行记录对象
+                    break;
+                case "editLCPaymentDate":
+                    var field = $(this).data('field');
+                    laydate.render({
+                        elem: this.firstChild
+                        , show: true //直接显示
+                        , closeStop: this
+                        , done: function (value, date) {
+                            data[field] = value;
+                            $.extend(obj.data, { 'LPDate': value })
+                            activeByType('updateRow', obj.data);	//更新行记录对象
+                        }
+                    });
+                    break;
+                case "del":
+                    layer.confirm('真的删除行么？', function (index) {
+                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        layer.close(index);
+                        activeByType('removeEmptyTableCache');
+                    });
+                    break;
+
+
+            }
+        });
+
+        //监听工具条
+        //律师费用
+        table.on('tool(SeizureTable)', function (obj) {
+            var data = obj.data, event = obj.event, tr = obj.tr; //获得当前行 tr 的DOM对象;
+            console.log(data);
+            switch (event) {
+                case "stateSeizure":
+                    var stateVal = tr.find("input[name='IsSeizureID']").prop('checked') ? 1 : 0;
+                    $.extend(obj.data, { 'IsSeizureID': stateVal })
+                    activeByType('updateRowSeizure', obj.data);	//更新行记录对象
+                    break;
+                case "editLCPaymentDate":
+                    var field = $(this).data('field');
+                    laydate.render({
+                        elem: this.firstChild
+                        , show: true //直接显示
+                        , closeStop: this
+                        , done: function (value, date) {
+                            data[field] = value;
+                            $.extend(obj.data, { 'LawyerPaymentDate': value })
+                            activeByType('updateRowSeizure', obj.data);	//更新行记录对象
+                        }
+                    });
+                    break;
+                case "delSeizure":
+                    layer.confirm('真的删除行么？', function (index) {
+                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        layer.close(index);
+                        activeByType('removeEmptyTableCacheSeizure');
+                    });
+                    break;
+            }
+        });
+
+        //诉讼费用
+        table.on('tool(LegalCostsTable)', function (obj) {
+            var data = obj.data, event = obj.event, tr = obj.tr; //获得当前行 tr 的DOM对象;
+            console.log(data);
+            switch (event) {
+                case "stateLegalCosts":
+                    var stateVal = tr.find("input[name='IsSettledID']").prop('checked') ? 1 : 0;
+                    $.extend(obj.data, { 'IsSettledID': stateVal })
+                    activeByType('updateRowLegalCosts', obj.data);	//更新行记录对象
+                    break;
+                case "delLegalCosts":
+                    layer.confirm('真的删除行么？', function (index) {
+                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        layer.close(index);
+                        activeByType('removeEmptyTableCacheLegalCosts');
+                    });
+                    break;
+                case "editLCPaymentDate":
+                    var field = $(this).data('field');
+                    laydate.render({
+                        elem: this.firstChild
+                        , show: true //直接显示
+                        , closeStop: this
+                        , done: function (value, date) {
+                            data[field] = value;
+                            $.extend(obj.data, { 'LCPaymentDate': value })
+                            activeByType('updateRowLegalCosts', obj.data);	//更新行记录对象
+
+                    
+                        
+                        }
+                    });
+                    break;
+                case "editLawyerPaymentDate":
+                    var field = $(this).data('field');
+                    laydate.render({
+                        elem: this.firstChild
+                        , show: true //直接显示
+                        , closeStop: this
+                        , done: function (value, date) {
+                            data[field] = value;
+                            $.extend(obj.data, { 'LawyerPaymentDate': value })
+                            activeByType('updateRowLegalCosts', obj.data);	//更新行记录对象
+
+                            var cells = document.querySelectorAll('div[lay-id="LegalCostsTable"] .layui-table-cell');
+                            for (var i = 0; i < cells.length; i++) {
+                                //cells[i].style.overflow = 'unset';
+                                cells[i].style.height = 'auto';
+                            }
+                            //渲染多选
+                            res.data.forEach(item => {
+                                var xm = xmSelect.render({
+                                    el: '#XM-' + item.id,
+                                    autoRow: true,
+                                    model: { type: 'fixed' },
+                                    data: [
+                                        { name: '受理费', value: '受理费' },
+                                        { name: '保全费', value: '保全费' },
+                                        { name: '执行费', value: '执行费' },
+                                    ]
+                                })
+
+                                item.__xm = xm;
+                            })
+                        }
+                    });
+                    break;
+
+
+            }
+        });
+
+
+
+        ////获取下拉框中的值
+        //form.on('select(type)', function (data) {
+        //    $('#type').trigger('change');
+        //    //alert(data.elem[data.elem.selectedIndex].text)
+        //    BangYZTypeAll(data.elem[data.elem.selectedIndex].text);
+
+        //    form.render('select');
+        //});
+
+        ////附件上传
+        ////多文件列表示例
+        //var fileadd = [];
+        //var number = 0;
+        //var demoListView = $('#demoList')
+        //    , uploadListIns = upload.render({
+        //        elem: '#testList'
+        //        , url: '/Law/uploadfile' //改成您自己的上传接口
+        //        , accept: 'file'
+        //        , multiple: true
+        //        , auto: false
+        //        , bindAction: '#testListAction1'
+        //        , choose: function (obj) {
+        //            var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+        //            //读取本地文件
+        //            obj.preview(function (index, file, result) {
+        //                var field = $(this).data('field');
+        //                var tr = $(['<tr id="upload-' + index + '">'
+        //                    , '<td>' + file.name + '</td>'
+        //                    , '<td>' + (file.size / 1024).toFixed(1) + 'kb</td>'
+        //                    , '<td>等待上传</td>'
+        //                    , '<td>' + SelectFileType(field) + '</td>'
+        //                    , '<td>'
+        //                    , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+        //                    , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+        //                    , '</td>'
+        //                    , '</tr>'].join(''));
+        //                number++;
+        //                //单个重传
+        //                tr.find('.demo-reload').on('click', function () {
+        //                    obj.upload(index, file);
+        //                });
+
+        //                //删除
+        //                tr.find('.demo-delete').on('click', function () {
+        //                    delete files[index]; //删除对应的文件
+        //                    tr.remove();
+
+        //                    Array.prototype.remove = function (dx) {
+
+        //                        if (isNaN(dx) || dx > this.length) {
+        //                            return false;
+        //                        }
+        //                        for (var i = 0, n = 0; i < this.length; i++) {
+        //                            if (this[i] != this[dx]) {
+        //                                this[n++] = this[i];
+        //                            }
+        //                        }
+        //                        this.length -= 1;
+
+        //                    };
+        //                    fileadd.remove(number);
+        //                    console.log(fileadd+"1");
+        //                    number--;
+        //                    uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+        //                });
+
+        //                demoListView.append(tr);
+        //                form.render('select');
+        //            });
+        //        }
+        //        , done: function (res, index, upload) {
+        //            if (res.res == "success") { //上传成功
+
+        //                var tr = demoListView.find('tr#upload-' + index)
+        //                    , tds = tr.children();
+        //                tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+        //                console.log(res);
+        //                fileadd.push(res);
+        //                console.log(fileadd);
+        //               // tds.eq(3).html(''); //清空操作
+        //                return delete this.files[index]; //删除文件队列已经上传成功的文件
+        //            }
+        //            this.error(index, upload);
+        //        }
+        //        , allDone: function (obj) { //当文件全部被提交后，才触发
+        //            layer.msg('上传成功');
+        //          // form.on('submit(component-form-demo1)');
+        //           $("#testListAction1").click();
+
+        //            // return false;
+
+        //        }
+        //        , error: function (index, upload) {
+        //            var tr = demoListView.find('tr#upload-' + index)
+        //                , tds = tr.children();
+        //            tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+        //            tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+        //        }
+        //    });
+
+        //function SelectFileType(field) {
+        //    console.log(viewObj.typeData);
+        //    var options = viewObj.renderSelectOptions(viewObj.typeData, { valueField: "id", textField: "name", selectedValue: "" });
+        //    var selectBtn = '<div class="layui-table-cell  laytable-cell-1-type"><a lay-event="type"></a><select  lay-verify="required"  name="type" lay-filter="type"><option value="">必须选择一个分类</option>' + options + '</select>';
+        //  //  selectBtn += '<div class="layui-unselect layui-form-select"><div class="layui-select-title"><input  type="text" placeholder="请选择分类" value="分类二" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择分类</dd><dd lay-value="1" class="">分类一</dd><dd lay-value="2" class="layui-this">分类二</dd><dd lay-value="3" class="">分类三</dd><dd lay-value="4" class="">分类四</dd></dl></div></div>';
+
+        //    return selectBtn;
+        //}
+
+        ////监听工具条
+        //table.on('tool(UploadTable)', function (obj) {
+        //    var data = obj.data, event = obj.event, tr = obj.tr; //获得当前行 tr 的DOM对象;
+        //    console.log(data);
+
+        //    switch (event) {
+        //        case "type":
+        //            //console.log(data);
+
+        //            var select = tr.find("select[name='type']");
+        //            if (select) {
+        //                var selectedVal = select.val();
+        //                if (!selectedVal) {
+        //                    layer.tips("请选择一个分类", select.next('.layui-form-select'), { tips: [3, '#FF5722'] }); //吸附提示
+        //                }
+        //                console.log(selectedVal);
+        //                $.extend(obj.data, { 'type': selectedVal });
+        //                activeByType('updateRow', obj.data);	//更新行记录对象
+        //            }
+        //            break;
+        //    }
+        //});
+
+        //var stype=0;
+        ////监听select下拉选中事件
+        //form.on('select(type)', function (data) {
+        //    //alert('监听select下拉选中事件');
+        //    var elem = data.elem; //得到select原始DOM对象
+        //    $(elem).prev("a[lay-event='type']").trigger("click");
+        //    stype += data.elem[data.elem.selectedIndex].text;
+        //    stype += ",";
+        //    //stype.push(data.elem[data.elem.selectedIndex].text);
+        //});
+
+
+        //function dateFormat(fmt, date) {
+        //    var ret;
+        //    var opt = {
+        //        "y+": date.getFullYear().toString(),        // 年份
+        //        "M+": (date.getMonth() + 1).toString(),     // 月份
+        //        "d+": date.getDate().toString(),            // 日
+        //        "h+": (date.getHours() > 12 ? (date.getHours() - 12).toString() : date.getHours().toString()), // 时12
+        //        "H+": date.getHours().toString(),           // 时24
+        //        "m+": date.getMinutes().toString(),         // 分
+        //        "s+": date.getSeconds().toString(),         // 秒
+        //        "S+": date.getMilliseconds().toString()     // 毫秒
+        //        // 有其他格式化字符需求可以继续添加，必须转化成字符串
+        //    }
+        //    for (var k in opt) {
+        //        ret = new RegExp("(" + k + ")").exec(fmt);
+        //        if (ret) {
+        //            fmt = fmt.replace(ret[1], (ret[1].length == 1) ? (opt[k]) : (opt[k].padStart(ret[1].length, "0")));
+        //        }
+        //    }
+        //    return fmt;
+        //}
+
+
+
+        //绑定事业部下拉框
+        $.ajax({
+            url: '/Law/BangDempart',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $('#quiz').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+                });
+                layui.form.render("select");
+                //重新渲染 固定写法
+            }
+        });
+
+        //绑定案件类型下拉框
+        $.ajax({
+            url: '/Law/BangLawType',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $('#type').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+                });
+                layui.form.render("select");
+                //重新渲染 固定写法
+            }
+        });
+
+        //绑定案件等级下拉框
+        $.ajax({
+            url: '/Law/BangGrade',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $('#gra').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+                });
+                layui.form.render("select");
+                //重新渲染 固定写法
+            }
+        });
+        ////绑定诉讼类型下拉框
+        //$.ajax({
+        //    url: '/Law/BangsuitType',
+        //    dataType: 'json',
+        //    type: 'get',
+        //    success: function (data) {
+        //        $.each(data, function (index, item) {
+        //            $('#suit').append(new Option(item.Name, item.id));// 下拉菜单里添加元素
+
+        //        });
+        //        layui.form.render("select");
+        //        //重新渲染 固定写法
+        //    }
+        //});
+
+        //绑定所有类型下拉框
+        $.ajax({
+            url: '/Law/BangLawStatus',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $('#stau').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+                });
+                layui.form.render("select");
+                //重新渲染 固定写法
+            }
+        });
+
+        //绑定所有类型下拉框
+        $.ajax({
+            url: '/Law/BangLawStatus',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+                    $('#stau1').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+                });
+                layui.form.render("select");
+                //重新渲染 固定写法
+            }
+        });
+
+
+
+        //监听指定开关
+        //form.on('submit(switchTest)', function (data) {
+        //    layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+        //        offset: '6px'
+        //    });
+        //    layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        //});
+
+        //监听提交
+        var oldData1 = table.cache[layTableId];
+        var oldData2 = table.cache[layTableIdSeizure];
+        var oldData3 = table.cache[layTableIdLegalCosts];
+        console.log(JSON.stringify(oldData2));
+        console.log(JSON.stringify(oldData3));
+
+        form.on('submit(component-form-demo1)', function (data) {
+
+            if (fileadd.length == number) {
+                $.post('/Law/AddLaw', {
+                    message: JSON.stringify(data.field),
+                    fW_Litigation: JSON.stringify(oldData1),
+                    fw_LegalCosts: JSON.stringify(oldData3),
+                    fW_Lawyer: JSON.stringify(oldData2),
+                    fw_LawFiles: JSON.stringify(fileadd),
+                    types: JSON.stringify(stype)
+                }, function (data) {
+                    if (data == 1) {
+                        alert("操作成功");
+                        parent.window.location.href = 'index';
+                        parent.layui.admin.events.closeThisTabs()
+                        //parent.layui.admin.events.closeThisTabs();
+                    }
+                    else if (data == 2) {
+                        alert("诉讼保全信息金额请输入错误!");
+                        location.reload();
+                    }
+                    else if (data == 3) {
+                        alert("诉讼费用金额请输入错误!");
+                        location.reload();
+                    }
+                    else if (data == 4) {
+                        alert("律师费用金额请输入错误!");
+                        location.reload();
+                    }
+                    else {
+                        alert("操作失败!");
+
+                    }
+                });
+            }
+
+
+
+            return false;
+        });
+
+
+
+    });
+
+
+
+    var demo7 = xmSelect.render({
+        el: '#demo8',
+        filterable: true,
+        clickClose: true,
+        name: 'LawFirm',
+        style: { width: '100%' },
+        remoteSearch: true,
+        radio: true,
+        showCount: 50,
+        searchTips: "输入名字",
+        remoteMethod: function (val, cb, show) {
+            //需要回传一个数组
+            $.ajax({
+                type: 'post',
+                url: '/Law/SelectLawFirmAll',
+                data: { keyword: val },
+                dataType: 'json',
+
+                success: function (data) {
+                    var res = data;
+                    console.log(data);
+                    cb(res.data)
+                },
+                error: function myfunction() {
+                    cb([]);
+                }
+            });
+        },
+        data: []
+    });
+    var demo8 = xmSelect.render({
+        el: '#demo9',
+        filterable: true,
+        clickClose: true,
+        name: 'Llawyer',
+        style: { width: '100%' },
+        remoteSearch: true,
+        radio: true,
+        showCount: 50,
+        searchTips: "输入名字",
+        remoteMethod: function (val, cb, show) {
+            //需要回传一个数组
+            $.ajax({
+                type: 'post',
+                url: '/Law/SelectLlawyerAll',
+                data: { keyword: val },
+                dataType: 'json',
+
+                success: function (data) {
+                    var res = data;
+                    console.log(data);
+                    cb(res.data)
+                },
+                error: function myfunction() {
+                    cb([]);
+                }
+            });
+        },
+        data: []
+    });
+</script>
+
+
+

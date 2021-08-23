@@ -1,0 +1,233 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<style>
+    .layui-form-select dl dd.layui-this {
+        background-color: #409EFF !important;
+        color: #fff !important;
+    }
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">诉讼列表</div>
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+            <div class="layui-form-item">
+                <div class="layui-inline" style="width:300px;">
+                    <label class="layui-form-label">类型</label>
+                    <div class="layui-input-block">
+                        <select name="TypeName" id="stau" lay-filter="xmFilter">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-inline" style="width:300px;">
+                    <label class="layui-form-label">公司名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="Company" id="teg1" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline" style="width:300px;">
+                    <label class="layui-form-label">联系人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="Contacts" id="teg2"  lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+
+                    </div>
+                </div>
+                <div class="layui-inline" style="float: right;">
+                    <button class="layui-btn layuiadmin-btn-order layui-btn-normal" id="reloadBtn" lay-submit lay-filter="LAY-app-order-search">
+                        <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>筛选
+                    </button>
+
+                </div>
+                @*<div style="float: right;">
+
+                    <button class="layui-btn layuiadmin-btn-order layui-btn-normal" lay-submit lay-filter="LAY-app-order-search" onclick="loadPage_onclick()">
+                        <i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>新增案件
+                    </button>
+                </div>*@
+            </div>
+            <table id="lawList" class="layui-table" lay-filter="lawList"></table>
+
+        </div>
+    </div>
+
+    @*<script type="text/html" id="barDemo">
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+        <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    </script>*@
+
+
+ 
+    <script>
+        layui.use('table', function () {
+            var table = layui.table;
+            ////展示已知数据
+            table.render({
+                elem: '#lawList'
+                , skin: 'line' //行边框风格
+                , even: true //开启隔行背景
+                , url: '/Law/SelectPersonalCompany'
+                //, toolbar: '#toolbarDemo'
+                , title: '个人/公司详情'
+                , loading: true
+                , height: 'full-235' //高度最大化减去差值
+                , totalRow: true
+                , cols: [[ //标题栏
+                    { field: 'rowid', title: '序号', width: 80, sort: true }
+                    , { field: 'TypeName', title: '类型', width: 120 }
+                    , { field: 'Company', title: '公司名称', width: 180 }
+                    , { field: 'Telephone', title: '公司电话', width: 120 }
+                    , { field: 'Contacts', title: '联系人', width: 80 }
+                    , { field: 'Phone', title: '联系人手机号', width: 120 }
+                    , { field: 'Address', title: '联系地址', minWidth: 180 }
+                    //, { title: '操作', toolbar: '#barDemo', align: 'center', fixed: 'right', width: 180 }
+                ]]
+                , page: true //是否显示分页
+                , limits: [10, 20, 50]
+                , limit: 10 //每页默认显示的数量
+            });
+            $("#reloadBtn").click(function (ev) {
+                //alert('1');
+                var tag1 = $('select[name="TypeName"] option:selected').val();
+
+                var tag2 = $('#teg1').val();
+
+                var tag3 = $('#teg2').val();
+                //alert(tag1);
+                //alert(decodeURIComponent(tag2));
+                //alert(keyWord);
+                table.reload('lawList', {
+                    url: '/Law/SelectPersonaLook'
+                    , where: {
+
+                        tag1: decodeURIComponent(tag1),
+                        tag2:tag2,
+                        tag3:tag3
+
+                    } //设定异步数据接口的额外参数
+                });
+            })
+
+
+
+
+            //监听工具条
+            table.on('tool(lawList)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'detail') {
+                    window.parent.layui.index.openTabsPage('/Law/LawInfo?id=' + data.ID, "查看案件详情");
+                    //layer.msg('ID：' + data.SID + ' 的查看操作');
+                    //alert(data.CorporationVersionID);
+                } else if (obj.event === 'del') {
+                    layer.confirm('真的删除行么', function (index) {
+                        obj.del();
+                        layer.close(index);
+                    });
+                } else if (obj.event === 'edit') {
+                    //layer.alert('编辑行：<br>' + JSON.stringify(data))
+                    window.parent.layui.index.openTabsPage('/Law/UpdateLaw?id=' + data.ID, "修改案件信息");
+                }
+            });
+
+            ////绑定事业部下拉框
+            //$.ajax({
+            //    url: '/Law/BangDempart',
+            //    dataType: 'json',
+            //    type: 'get',
+            //    success: function (data) {
+            //        $.each(data, function (index, item) {
+            //            $('#quiz').append(new Option(item.Name, item.id));// 下拉菜单里添加元素
+
+            //        });
+            //        layui.form.render("select");
+            //        //重新渲染 固定写法
+            //    }
+            //});
+
+            //绑定案件类型下拉框
+            $.ajax({
+                url: '/Law/BangLawType',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        $('#type').append(new Option(item.Name, item.id));// 下拉菜单里添加元素
+
+                    });
+                    layui.form.render("select");
+                    //重新渲染 固定写法
+                }
+            });
+            //绑定所有类型下拉框
+            $.ajax({
+                url: '/Law/BangPersonaStatus',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        $('#stau').append(new Option(item.TypeName, item.id));// 下拉菜单里添加元素
+
+                    });
+                    layui.form.render("select");
+                    //重新渲染 固定写法
+                }
+            });
+
+
+            //绑定诉讼类型下拉框
+            $.ajax({
+                url: '/Law/BangsuitType',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        $('#suit').append(new Option(item.Name, item.id));// 下拉菜单里添加元素
+
+                    });
+                    layui.form.render("select");
+                    //重新渲染 固定写法
+                }
+            });
+
+        });
+
+
+
+
+        function loadPage_onclick() {
+            //$('#content').load($(this).data("link"));
+            window.parent.layui.index.openTabsPage('/Law/AddLawCase?id=', "新增案件");
+        };
+
+        //function LayInfoPage_onclick() {
+        //    //$('#content').load($(this).data("link"));
+        //    window.parent.layui.index.openTabsPage('/Law/LawInfo?id=', "查看案件详情");
+        //};
+    </script>
+
+    <script>
+        function FormDate(str, fmt) { //str: 日期字符串；fmt:格式类型
+            if (str == null || str == '') {
+                return "";
+            }
+            var date = eval('new ' + str.substr(1, str.length - 2)); //截取字符串之后：Date(1572490889017)
+            var o = {
+                "M+": date.getMonth() + 1, //月份
+                "d+": date.getDate(), //日
+                "H+": date.getHours(), //小时
+                "m+": date.getMinutes(), //分
+                "s+": date.getSeconds(), //秒
+                "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+                "S": date.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+    </script>
+

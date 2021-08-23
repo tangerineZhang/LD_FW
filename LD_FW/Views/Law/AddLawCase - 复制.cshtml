@@ -1,0 +1,1250 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+
+<style>
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }
+
+    .layui-form-item {
+        margin-bottom: 2px;
+        clear: both;
+    }
+
+        .layui-form-item .layui-inline {
+            margin-bottom: 0px;
+            margin-right: 10px;
+        }
+    /*.site-demo-button div {
+        margin: 20px 30px 10px;
+    }
+
+    .layui-elem-field legend {
+        margin-left: 20px;
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }*/
+
+    .layui-form-label {
+        float: left;
+        display: block;
+        padding: 9px 15px;
+        font-weight: 400;
+        line-height: 18px;
+        width: 160px;
+        text-align: right;
+        background-color: #e8e8e8;
+        font-weight: bold;
+    }
+
+    .layui-input-block {
+        margin-left: 190px;
+        min-height: 36px;
+    }
+
+    .layui-input, .layui-select, .layui-textarea {
+        height: 38px;
+        line-height: 1.3;
+        line-height: 38px\9;
+        border-width: 0px;
+        border-bottom-width: 1px;
+        border-style: solid;
+        background-color: #fff;
+        border-radius: 2px;
+    }
+
+    .layui-form-onswitch {
+        border-color: #5FB878;
+        background-color: #5FB878;
+    }
+
+    .layui-form-switch {
+        position: relative;
+        height: 22px;
+        line-height: 22px;
+        min-width: 35px;
+        padding: 0 5px;
+        margin-top: 8px;
+        margin-left: 8px;
+        border: 1px solid #d2d2d2;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: .1s linear;
+    }
+
+    /*table*/
+    /*这个是让table里的下拉框不被遮挡*/
+    .layui-table-cell {
+        overflow: visible !important;
+    }
+
+    .layui-table-box {
+        overflow: visible;
+    }
+
+    .layui-table-body {
+        overflow: visible;
+    }
+
+    td .layui-form-select {
+        margin-top: -10px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }
+
+    /*td .layui-laydate {
+        margin-top: -10px;
+        margin-left: -15px;
+        margin-right: -15px;
+    }*/
+    /*table end*/
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">基本信息</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">案件名称</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">案件等级</label>
+                    <div class="layui-input-block">
+                        <select name="quiz">
+                            <option value="">请选择</option>
+                            <option value="A">A级</option>
+                            <option value="B">B级</option>
+                            <option value="C">C级</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">诉讼类型</label>
+                        <div class="layui-input-block">
+                            <select name="quiz">
+                                <option value="">请选择</option>
+                                <option value="A">主诉</option>
+                                <option value="B">被诉</option>
+                                <option value="C">上诉</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">案件类型</label>
+                        <div class="layui-input-block">
+                            <select name="quiz">
+                                <option value="">请选择</option>
+                                <option value="A">其他纠纷</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">所属事业部</label>
+                        <div class="layui-input-block">
+                            <select name="quiz">
+                                <option value="">请选择</option>
+                                <option value="A">集团总部</option>
+                                <option value="B">上海事业部</option>
+                                <option value="C">郑州事业部</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">原告</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">被告</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">第3人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">诉讼法院</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">案号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">代理律所</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">代理律师</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">立案时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input test-item" id="test1" placeholder="yyyy-MM-dd" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">结案时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input test-item" id="test2" placeholder="yyyy-MM-dd" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">当前状态</label>
+                        <div class="layui-input-block">
+                            <select name="quiz">
+                                <option value="">请选择</option>
+                                <option value="A">正常跟进</option>
+                                <option value="B">已受理未开庭</option>
+                                <option value="C">已开庭未判决</option>
+                                <option value="D">已判决/已调解</option>
+                                <option value="E">已申请强制执行</option>
+                                <option value="F">已执行和解</option>
+                                <option value="G">结案</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="layui-card-header">案情描述</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">案情简介</label>
+                    <div class="layui-input-block">
+                        <textarea name="text" placeholder="请输入内容" class="layui-textarea" style="border-width: 1px;">豪阳公司与梁光红就江宁区汤山街相邻土地利用发生纠纷，公司起诉。一审驳回诉请，我司不服提出上诉。二审判决支持我方诉求。
+梁光红不满二审判决，提出再审申请。</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">诉讼请求</label>
+                    <div class="layui-input-block">
+                        <textarea name="text" placeholder="请输入内容" class="layui-textarea" style="border-width: 1px;">1、请求撤销二审判决；
+2、被申请人承担全部一、二审诉讼费用。</textarea>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+        <div class="layui-card-header">诉讼保全信息</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                <div class="layui-form-item">
+                    <table class="layui-hide" id="demo" lay-filter="demo"></table>
+                </div>
+            </form>
+        </div>
+        <div class="layui-card-header">查封信息</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                <div class="layui-form-item">
+                    <table class="layui-hide" id="demoCF" lay-filter="demoCF"></table>
+                </div>
+            </form>
+        </div>
+        <div class="layui-card-header">涉案金额（单位：万元）</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">涉案金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">应付未付金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">实际赔付</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">应止损金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">已止损金额</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">止损率</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入N%" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">风险敞口</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">是否纳入考核</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="component-form-switchTest" lay-text="是|否"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>是</em><i></i></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-card-header">诉讼费用（单位：万元）</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                @*<div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">诉讼费用</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">缴纳时间</label>
+                        <div class="layui-input-block">
+                            <input type="text" class="layui-input" id="test1" placeholder="yyyy-MM-dd" lay-key="1" style="width:191px">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">诉讼费用结清</label>
+                        <div class="layui-input-block">
+                            <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="component-form-switchTest" lay-text="是|否"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>是</em><i></i></div>
+                        </div>
+                    </div>
+                </div>*@
+
+                <div class="layui-form-item">
+                    <table class="layui-hide" id="demoSSFY" lay-filter="demoSSFY"></table>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="layui-card-header">解决方案及进度</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">解决思路</label>
+                    <div class="layui-input-block">
+                        <textarea name="text" placeholder="请输入内容" class="layui-textarea" style="border-width: 1px;"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">责任人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">跟进人</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">跟进记录</label>
+                    <div class="layui-input-block">
+                        <textarea name="text" placeholder="请输入内容" class="layui-textarea" style="border-width: 1px;"></textarea>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="layui-card-header">附件</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                <div class="layui-upload">
+                    <button type="button" class="layui-btn layui-btn-normal" id="testList">选择多文件</button>
+                    <div class="layui-upload-list">
+                        <table class="layui-table">
+                            <thead>
+                                <tr>
+                                    <th>文件名</th>
+                                    <th>大小</th>
+                                    <th>状态</th>
+                                    <th>类型</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="demoList"></tbody>
+                        </table>
+                    </div>
+                    @*<button type="button" class="layui-btn" id="testListAction">开始上传</button>*@
+                </div>
+
+                @*<div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label"><strong>传票</strong></label>
+                        <label class="layui-form-label" style="width:auto"><em>测试传票</em></label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label"><strong>起诉状</strong></label>
+                        <label class="layui-form-label" style="width:auto"><em>测试起诉状</em></label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label"><strong>证据材料</strong></label>
+                        <label class="layui-form-label" style="width:auto"><em>测试证据材料</em></label>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label"><strong>其他</strong></label>
+                        <label class="layui-form-label" style="width:auto"><em>测试其他</em></label>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-layout-admin">
+                    <div class="layui-input-block">
+                        <div class="layui-footer" style="left: 0;">
+                            <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="component-form-demo1"> <i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </div>*@
+                <div class="layui-form-item layui-layout-admin">
+                    <div class="layui-input-block">
+                        <div class="layui-footer" style="left: 0;">
+                            <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="component-form-demo1"> <i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+
+
+
+        @*<div class="layui-card-header">测试模块</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单行输入框</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">验证必填项</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="username" lay-verify="required" placeholder="请输入" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">验证手机</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="phone" lay-verify="required|phone" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">验证邮箱</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">多规则验证</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="number" lay-verify="required|number" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">验证日期</label>
+                        <div class="layui-input-inline">
+                            <input type="text" name="date" id="LAY-component-form-group-date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input" lay-key="1">
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">验证链接</label>
+                        <div class="layui-input-inline">
+                            <input type="tel" name="url" lay-verify="url" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">验证身份证</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="identity" lay-verify="identity" placeholder="" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">自定义验证</label>
+                    <div class="layui-input-inline">
+                        <input type="password" name="password" lay-verify="pass" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div>
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">范围</label>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="price_min" placeholder="￥" autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 100px;">
+                            <input type="text" name="price_max" placeholder="￥" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单行选择框</label>
+                    <div class="layui-input-block">
+                        <select name="interest" lay-filter="aihao">
+                            <option value=""></option>
+                            <option value="0">写作</option>
+                            <option value="1" selected="">阅读</option>
+                            <option value="2">游戏</option>
+                            <option value="3">音乐</option>
+                            <option value="4">旅行</option>
+                        </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择" value="阅读" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择</dd><dd lay-value="0" class="">写作</dd><dd lay-value="1" class="layui-this">阅读</dd><dd lay-value="2" class="">游戏</dd><dd lay-value="3" class="">音乐</dd><dd lay-value="4" class="">旅行</dd></dl></div>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">分组选择框</label>
+                        <div class="layui-input-inline">
+                            <select name="quiz">
+                                <option value="">请选择问题</option>
+                                <optgroup label="城市记忆">
+                                    <option value="你工作的第一个城市">你工作的第一个城市</option>
+                                </optgroup>
+                                <optgroup label="学生时代">
+                                    <option value="你的工号">你的工号</option>
+                                    <option value="你最喜欢的老师">你最喜欢的老师</option>
+                                </optgroup>
+                            </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择问题" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit layui-select-group"><dd lay-value="" class="layui-select-tips">请选择问题</dd><dt>城市记忆</dt><dd lay-value="你工作的第一个城市" class="">你工作的第一个城市</dd><dt>学生时代</dt><dd lay-value="你的工号" class="">你的工号</dd><dd lay-value="你最喜欢的老师" class="">你最喜欢的老师</dd></dl></div>
+                        </div>
+                    </div>
+                    <div class="layui-inline">
+                        <label class="layui-form-label">搜索选择框</label>
+                        <div class="layui-input-inline">
+                            <select name="modules" lay-verify="required" lay-search="">
+                                <option value="">直接选择或搜索选择</option>
+                                <option value="1">layer</option>
+                                <option value="2">form</option>
+                                <option value="3">layim</option>
+                                <option value="4">element</option>
+                                <option value="5">laytpl</option>
+                                <option value="6">upload</option>
+                                <option value="7">laydate</option>
+                                <option value="8">laypage</option>
+                                <option value="9">flow</option>
+                                <option value="10">util</option>
+                                <option value="11">code</option>
+                                <option value="12">tree</option>
+                                <option value="13">layedit</option>
+                                <option value="14">nav</option>
+                                <option value="15">tab</option>
+                                <option value="16">table</option>
+                                <option value="17">select</option>
+                                <option value="18">checkbox</option>
+                                <option value="19">switch</option>
+                                <option value="20">radio</option>
+                            </select><div class="layui-form-select"><div class="layui-select-title"><input type="text" placeholder="直接选择或搜索选择" value="" class="layui-input"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">直接选择或搜索选择</dd><dd lay-value="1" class="">layer</dd><dd lay-value="2" class="">form</dd><dd lay-value="3" class="">layim</dd><dd lay-value="4" class="">element</dd><dd lay-value="5" class="">laytpl</dd><dd lay-value="6" class="">upload</dd><dd lay-value="7" class="">laydate</dd><dd lay-value="8" class="">laypage</dd><dd lay-value="9" class="">flow</dd><dd lay-value="10" class="">util</dd><dd lay-value="11" class="">code</dd><dd lay-value="12" class="">tree</dd><dd lay-value="13" class="">layedit</dd><dd lay-value="14" class="">nav</dd><dd lay-value="15" class="">tab</dd><dd lay-value="16" class="">table</dd><dd lay-value="17" class="">select</dd><dd lay-value="18" class="">checkbox</dd><dd lay-value="19" class="">switch</dd><dd lay-value="20" class="">radio</dd></dl></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">联动选择框</label>
+                    <div class="layui-input-block">
+                        <div class="layui-inline">
+                            <select name="quiz1">
+                                <option value="">请选择省</option>
+                                <option value="浙江" selected="">浙江省</option>
+                                <option value="你的工号">江西省</option>
+                                <option value="你最喜欢的老师">福建省</option>
+                            </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择省" value="浙江省" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择省</dd><dd lay-value="浙江" class="layui-this">浙江省</dd><dd lay-value="你的工号" class="">江西省</dd><dd lay-value="你最喜欢的老师" class="">福建省</dd></dl></div>
+                        </div>
+                        <div class="layui-inline">
+                            <select name="quiz2">
+                                <option value="">请选择市</option>
+                                <option value="杭州">杭州</option>
+                                <option value="宁波" disabled="">宁波</option>
+                                <option value="温州">温州</option>
+                                <option value="温州">台州</option>
+                                <option value="温州">绍兴</option>
+                            </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择市" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择市</dd><dd lay-value="杭州" class="">杭州</dd><dd lay-value="宁波" class=" layui-disabled">宁波</dd><dd lay-value="温州" class="">温州</dd><dd lay-value="温州" class="">台州</dd><dd lay-value="温州" class="">绍兴</dd></dl></div>
+                        </div>
+                        <div class="layui-inline">
+                            <select name="quiz3">
+                                <option value="">请选择县/区</option>
+                                <option value="西湖区">西湖区</option>
+                                <option value="余杭区">余杭区</option>
+                                <option value="拱墅区">临安市</option>
+                            </select><div class="layui-unselect layui-form-select"><div class="layui-select-title"><input type="text" placeholder="请选择县/区" value="" readonly="" class="layui-input layui-unselect"><i class="layui-edge"></i></div><dl class="layui-anim layui-anim-upbit"><dd lay-value="" class="layui-select-tips">请选择县/区</dd><dd lay-value="西湖区" class="">西湖区</dd><dd lay-value="余杭区" class="">余杭区</dd><dd lay-value="拱墅区" class="">临安市</dd></dl></div>
+                        </div>
+                        <div class="layui-inline">
+                            <div class="layui-form-mid layui-word-aux">此处只是演示联动排版，并未做联动交互</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">复选框</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="like[write]" title="写作"><div class="layui-unselect layui-form-checkbox"><span>写作</span><i class="layui-icon layui-icon-ok"></i></div>
+                        <input type="checkbox" name="like[read]" title="阅读" checked=""><div class="layui-unselect layui-form-checkbox layui-form-checked"><span>阅读</span><i class="layui-icon layui-icon-ok"></i></div>
+                        <input type="checkbox" name="like[game]" title="游戏"><div class="layui-unselect layui-form-checkbox"><span>游戏</span><i class="layui-icon layui-icon-ok"></i></div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item" pane="">
+                    <label class="layui-form-label">原始复选框</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作" checked=""><div class="layui-unselect layui-form-checkbox layui-form-checked" lay-skin="primary"><span>写作</span><i class="layui-icon layui-icon-ok"></i></div>
+                        <input type="checkbox" name="like1[read]" lay-skin="primary" title="阅读"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><span>阅读</span><i class="layui-icon layui-icon-ok"></i></div>
+                        <input type="checkbox" name="like1[game]" lay-skin="primary" title="游戏" disabled=""><div class="layui-unselect layui-form-checkbox layui-checkbox-disbaled layui-disabled" lay-skin="primary"><span>游戏</span><i class="layui-icon layui-icon-ok"></i></div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开关-默认关</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch" lay-skin="_switch"><em>OFF</em><i></i></div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">开关-默认开</label>
+                    <div class="layui-input-block">
+                        <input type="checkbox" checked="" name="open" lay-skin="switch" lay-filter="component-form-switchTest" lay-text="ON|OFF"><div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>ON</em><i></i></div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">单选框</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex" value="男" title="男" checked=""><div class="layui-unselect layui-form-radio layui-form-radioed"><i class="layui-anim layui-icon"></i><div>男</div></div>
+                        <input type="radio" name="sex" value="女" title="女"><div class="layui-unselect layui-form-radio"><i class="layui-anim layui-icon"></i><div>女</div></div>
+                        <input type="radio" name="sex" value="禁" title="禁用" disabled=""><div class="layui-unselect layui-form-radio layui-radio-disbaled layui-disabled"><i class="layui-anim layui-icon"></i><div>禁用</div></div>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">普通文本域</label>
+                    <div class="layui-input-block">
+                        <textarea name="text" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-layout-admin">
+                    <div class="layui-input-block">
+                        <div class="layui-footer" style="left: 0;">
+                            <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>*@
+
+
+
+
+    </div>
+</div>
+@*<div class="layui-form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <input type="text" class="layui-input test-item" placeholder="yyyy-MM-dd">
+        </div>
+        <div class="layui-inline">
+            <input type="text" class="layui-input test-item" placeholder="yyyy-MM-dd">
+        </div>
+        <div class="layui-inline">
+            <input type="text" class="layui-input test-item" placeholder="yyyy-MM-dd">
+        </div>
+    </div>
+</div>*@
+
+
+<script>
+    layui.use(['form', 'layedit'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit;
+        //, laydate = layui.laydate;
+
+
+        //同时绑定多个时间控件
+        //$(".layui-fluid").find(".layui-input").each(function () {
+        //    laydate.render({
+        //        elem: this
+        //    });
+        //});
+
+        //laydate.render({
+        //    elem: '#date1'
+        //});
+
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            title: function (value) {
+                if (value.length < 5) {
+                    return '标题至少得5个字符啊';
+                }
+            }
+            , pass: [
+                /^[\S]{6,12}$/
+                , '密码必须6到12位，且不能出现空格'
+            ]
+            , content: function (value) {
+                layedit.sync(editIndex);
+            }
+        });
+
+        //监听指定开关
+        form.on('switch(switchTest)', function (data) {
+            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
+                offset: '6px'
+            });
+            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //监听提交
+        form.on('submit(demo)', function (data) {
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+
+        //表单赋值
+        layui.$('#LAY-component-form-setval').on('click', function () {
+            form.val('example', {
+                "username": "贤心" // "name": "value"
+                , "password": "123456"
+                , "interest": 1
+                , "like[write]": true //复选框选中状态
+                , "close": true //开关状态
+                , "sex": "女"
+                , "desc": "我爱 layui"
+            });
+        });
+
+        //表单取值
+        layui.$('#LAY-component-form-getval').on('click', function () {
+            var data = form.val('example');
+            alert(JSON.stringify(data));
+        });
+
+    });
+
+
+
+</script>
+
+@*table*@
+<script>
+    layui.use(['table','laydate'], function () {
+        var table = layui.table,
+            form = layui.form,
+            laydate = layui.laydate;
+        //展示已知数据
+        table.render({
+            elem: '#demo', id: "demo"
+            //, width: 500
+            , cols: [[ //标题栏
+                //{ type: 'checkbox', fixed: 'left', hide: true },
+                { fixed: 'left', toolbar: '#bar', title: '操作', width: 180, align: 'center' }	
+                , { field: 'sfssbq', title: '我司是否已办理诉讼保全', width: 185, templet: '#switchTpl', event:'BQCheck', unresize: true, align: "center" }
+                , { field: 'InventoryQuantity', title: '保全金额', edit: 'text', width: 158, align: "center", placeholder: '￥', autocomplete: 'off' }
+                , { field: 'bqzcxx', title: '保全资产信息', edit: 'text', align: "center" }
+
+            ]]
+            //这里就是一开始渲染就添加一个空的一行数据，或者添加一下数据也可以
+            , data: [{ left: new Date().valueOf(), sfssbq: 0, InventoryQuantity: '', bqzcxx: ''}]
+            , done: function (res, curr, count) {
+                //下拉框绑定
+                $.ajax({
+                    type: "post",
+                    url: "SelectLocations",
+                    dataType: "json",
+                    async: false,
+                    success: function (data) {
+                        for (k in data) {
+                            $("select[name='dictName']").append('<option value="' + data[k].id + '">' + data[k].text + '</option>');
+                        }
+                    }
+                });
+                //根据已有的值回填下拉框
+                layui.each($("select[name='dictName']"), function (index, item) {
+                    var elem = $(item);
+                    elem.val(elem.data('value'));
+                });
+                form.render('select');
+            }
+            , even: true
+        });
+        //监听添加一行和删除一行操作
+        table.on('tool(demo)', function (obj) {
+            //var data = obj.data;
+            var tr = obj.tr;
+            if (obj.event === 'edit') {
+                var Data = table.cache["demo"];
+                console.log(Data);
+                var datas = { left: new Date().valueOf(), sfssbq: 0, InventoryQuantity: '',  bqzcxx: '' };
+                Data.push(datas);
+                table.reload('demo', {
+                    data: Data
+                });
+            } else if (obj.event === 'del') {
+                //var Data = table.cache["demo"];
+                //if (obj.tr.data('index') != 0) {
+                //    Data.splice(obj.tr.data('index'), 1)//根据索引删除当前行
+                //}
+                //table.reload('demo', {
+                //    data: Data
+                //});
+
+                layer.confirm('真的删除行么？', function (index) {
+                        obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                        layer.close(index);
+                        activeByType('removeEmptyTableCache');
+                    });
+            }
+            else if (obj.event === 'BQCheck') {
+                alert('1');
+                var stateVal = tr.find("input[name='sfssbq']").prop('checked') ? 1 : 0;
+                alert(stateVal);
+                $.extend(obj.data, { 'sfssbq': stateVal });
+                alert('2');
+                activeByType('updateRow', obj.data);	//更新行记录对象
+            }
+    
+        });
+
+
+        //展示已知数据
+        table.render({
+            elem: '#demoCF',
+            id: 'demoCF'
+            //, width: 500
+            , cols: [[ //标题栏
+                //{ type: 'checkbox', fixed: 'left', hide: true },
+                { fixed: 'left', toolbar: '#bar', title: '操作', width: 180, align: 'center' }
+                //, { field: 'LocationID', title: '仓位编码', width: 158, templet: '#selectDictName', align: "center" }
+                , { field: 'sfcf', title: '是否有第3人查封', width: 185, templet: '#switchTpCF', unresize: true, align: "center" }
+                , { field: 'cfje', title: '查封金额', edit: 'text', width: 158, align: "center", placeholder: '￥', autocomplete: 'off' }
+                , { field: 'cfzcxx', title: '查封资产信息', edit: 'text', align: "center" }
+
+            ]]
+            //这里就是一开始渲染就添加一个空的一行数据，或者添加一下数据也可以
+            , data: [{ "cfje": "", "cfzcxx": "" }]
+            , done: function (res, curr, count) {
+                ////下拉框绑定
+                //$.ajax({
+                //    type: "post",
+                //    url: "SelectLocations",
+                //    dataType: "json",
+                //    async: false,
+                //    success: function (data) {
+                //        for (k in data) {
+                //            $("select[name='dictName']").append('<option value="' + data[k].id + '">' + data[k].text + '</option>');
+                //        }
+                //    }
+                //});
+                ////根据已有的值回填下拉框
+                //layui.each($("select[name='dictName']"), function (index, item) {
+                //    var elem = $(item);
+                //    elem.val(elem.data('value'));
+                //});
+                //form.render('select');
+            }
+            , even: true
+        });
+        //监听添加一行和删除一行操作
+        table.on('tool(demoCF)', function (obj) {
+            //var data = obj.data;
+            if (obj.event === 'edit') {
+                var Data = table.cache["demoCF"];
+                var datas = {
+                    "cfje": ""
+                    , "cfzcxx": ""
+                }
+                Data.push(datas);
+
+            } else if (obj.event === 'del') {
+                var Data = table.cache["demoCF"];
+                if (obj.tr.data('index') != 0) {
+                    Data.splice(obj.tr.data('index'), 1)//根据索引删除当前行
+
+                }
+            }
+            table.reload('demoCF', {
+                data: Data
+            });
+        });
+        
+        //展示已知数据-诉讼费用
+        table.render({
+            elem: '#demoSSFY',
+            id: 'demoSSFY'
+            //, width: 500
+            , cols: [[ //标题栏
+                //{ type: 'checkbox', fixed: 'left', hide: true },
+                { fixed: 'left', toolbar: '#bar', title: '操作', width: 180, align: 'center' }
+                //, { field: 'LocationID', title: '仓位编码', width: 158, templet: '#selectDictName', align: "center" }
+                , { field: 'ssfy', title: '诉讼费用', edit: 'text', width: 158, align: "center", placeholder: '￥', autocomplete: 'off' }
+                //, { field: 'ssjnje', title: '缴纳时间', width: 185, templet: '#switchTpSJ', unresize: true, align: "center" }
+                , { field: 'SSJNDate', title: '缴纳时间', edit: 'text', unresize: true, event: 'editStartDate' }
+                , { field: 'ssfyjs', title: '诉讼费用结清', width: 185, templet: '#switchTpCF', unresize: true, align: "center" }
+                , { field: 'lsfy', title: '律师费用', edit: 'text', width: 158, align: "center", placeholder: '￥', autocomplete: 'off' }
+                //, { field: 'lsjnje', title: '缴纳时间', width: 185, templet: '#switchTpSJ', unresize: true, align: "center" }
+                //, { field: "rzrq", title: "认证日期", width: 160, align: 'left', event: 'editStartDate', data_field: 'rzrq' }
+                , { field: 'ArrivalDate', title: '缴纳时间', edit: 'text', unresize: true, event: 'editStartDate' }
+            ]]
+            //这里就是一开始渲染就添加一个空的一行数据，或者添加一下数据也可以
+            , data: [{ "cfje": "", "cfzcxx": "" }]
+            , done: function (res, curr, count) {
+    
+
+                ////下拉框绑定
+                //$.ajax({
+                //    type: "post",
+                //    url: "SelectLocations",
+                //    dataType: "json",
+                //    async: false,
+                //    success: function (data) {
+                //        for (k in data) {
+                //            $("select[name='dictName']").append('<option value="' + data[k].id + '">' + data[k].text + '</option>');
+                //        }
+                //    }
+                //});
+                ////根据已有的值回填下拉框
+                //layui.each($("select[name='dictName']"), function (index, item) {
+                //    var elem = $(item);
+                //    elem.val(elem.data('value'));
+                //});
+                //form.render('select');
+            }
+            , even: true
+        });
+        //监听添加一行和删除一行操作
+        table.on('tool(demoSSFY)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') {
+                var Data = table.cache["demoSSFY"];
+                console.log(Data);
+                var datas = {
+                    "ssfy": ""
+                    , "SSJNDate": ""
+                    , "ssfyjs": 0
+                    , "lsfy": ""
+                    , "ArrivalDate": ""
+                }
+                Data.push(datas);
+                table.reload('demoSSFY', {
+                    data: Data
+                });
+
+
+                //var oldData = table.cache[layTableId];
+                //console.log(oldData);
+                //var newRow = { tempId: new Date().valueOf(), type: null, name: '请填写名称', state: 0 };
+                //oldData.push(newRow);
+                //tableIns.reload({
+                //    data: oldData
+                //});
+
+            } else if (obj.event === 'del') {
+                var Data = table.cache["demoSSFY"];
+                if (obj.tr.data('index') != 0) {
+                    Data.splice(obj.tr.data('index'), 1)//根据索引删除当前行
+
+                }
+                table.reload('demoSSFY', {
+                    data: Data
+                });
+            }
+            else if (obj.event = 'editStartDate') {
+                var field = $(this).data('field');
+                laydate.render({
+                    elem: this.firstChild
+                    , show: true //直接显示
+                    , closeStop: this
+                    , done: function (value, date) {
+                        data[field] = value;
+                        obj.update(data);
+                    }
+                });
+            }
+
+        });
+
+        //这是监听可编辑的
+        table.on('edit(demo)', function (obj) {
+            //console.log(obj.tr.data("index"));//获取当前行索引
+            //data = obj.data //得到所在行所有键值
+        });
+        //这是监听下拉框改变
+        form.on('select(dictName)', function (data) {
+            var selectElem = $(data.elem);
+            var tdElem = selectElem.closest("td");
+            var trElem = tdElem.closest("tr");
+            var tableView = trElem.closest(".layui-table-view");
+            table.cache[tableView.attr("lay-id")][trElem.data("index")][tdElem.data("field")] = data.value;
+
+        });
+        //监听行工具事件
+        //table.on('tool(demoSSFY)', function (obj) {
+        //    var dataValue  = obj.data;
+        //    if (obj.event === 'editStartDate') {
+        //        var field = $(this).data('field');
+        //        alert('1');
+                //laydate.render({
+                //    elem: this.firstChild
+                //    , show: true //直接显示
+                //    , closeStop: this
+                //    , done: function (value, date) {
+                //        alert(value);
+                //        dataDate[field] = value;
+                //        obj.update(date);
+                //    }
+                //});
+            //}
+        //    else if (obj.event = 'editzsdqsj') {
+        //        var field = $(this).data('field');
+        //        laydate.render({
+        //            elem: this.firstChild
+        //            , show: true //直接显示
+        //            , closeStop: this
+        //            , done: function (value, date) {
+        //                dataDate[field] = value;
+        //                obj.update(date);
+        //            }
+        //        });
+        //    }
+        //    table.reload('demoSSFY', {
+        //        data: Data
+        //    });
+        //});
+
+    });
+</script>
+
+<script type="text/html" id="selectDictName">
+    <select name="dictName" lay-filter="dictName" data-value="{{d.LocationID}}"></select>
+</script>
+
+<script type="text/html" id="bar">
+    <a class="layui-btn layui-btn-xs layui-btn-normal" lay-event="edit">新增</a>
+    <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+</script>
+
+<script type="text/html" id="switchTpl">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="sfssbq" value="0" lay-skin="switch" lay-text="是|否" lay-filter="sexDemo" {{ d.sfssbq > 0 ? 'checked' : '' }}>
+    @*<input type="checkbox" name="state" lay-skin="switch" lay-text="是|否" d.state > 0 ? ' checked' : ''/>*@
+</script>
+
+@*table end*@
+
+@*table 查封信息*@
+
+<script type="text/html" id="selectDictName">
+    <select name="dictName" lay-filter="dictName" data-value="{{d.LocationID}}"></select>
+</script>
+
+
+<script type="text/html" id="switchTpCF">
+    <!-- 这里的 checked 的状态只是演示 -->
+    <input type="checkbox" name="sfcf" value="{{d.id}}" lay-skin="switch" lay-text="是|否" lay-filter="sexDemo" {{ d.sfcf > 0 ? 'checked' : '' }}>
+</script>
+
+@*table end*@
+
+<script>
+    //layui.use('laydate', function () {
+    //    var laydate = layui.laydate;
+
+
+
+    //    //同时绑定多个
+    //    lay('.test-item').$('.choosedate').each(function () {
+    //        laydate.render({
+    //            elem: this
+    //            , trigger: 'click'
+    //        });
+    //    });
+
+    //});
+
+
+    //同时绑定多个时间控件
+    //layui.use('laydate', function () {
+    //    $(".layui-fluid").find(".choosedate").each(function () {
+    //        var laydate = layui.laydate;
+    //        laydate.render({
+    //            elem: this
+    //            ,trigger: 'click'
+    //        });
+    //    });
+    //});
+
+    layui.use('laydate', function () {
+        var laydate = layui.laydate;
+
+        //同时绑定多个
+        lay('.test-item').each(function () {
+            laydate.render({
+                elem: this
+                , trigger: 'click'
+            });
+        });
+
+    });
+</script>
+
+<script>
+    layui.use('upload', function () {
+        var $ = layui.jquery
+            , upload = layui.upload;
+
+        //多文件列表示例
+        var demoListView = $('#demoList')
+            , uploadListIns = upload.render({
+                elem: '#testList'
+                , url: 'https://httpbin.org/post' //改成您自己的上传接口
+                , accept: 'file'
+                , multiple: true
+                , auto: false
+                , bindAction: '#testListAction'
+                , choose: function (obj) {
+                    var files = this.files = obj.pushFile(); //将每次选择的文件追加到文件队列
+                    //读取本地文件
+                    obj.preview(function (index, file, result) {
+                        var tr = $(['<tr id="upload-' + index + '">'
+                            , '<td>' + file.name + '</td>'
+                            , '<td>' + (file.size / 1024).toFixed(1) + 'kb</td>'
+                            , '<td>等待上传</td>'
+                            , '<td> <div class="layui-input-block">< select name = "quiz" ><option value="">请选择</option><option value="A">正常跟进</option><option value="B">已受理未开庭</option></select ></div ></td>'
+                            , '<td>'
+                            , '<button class="layui-btn layui-btn-xs demo-reload layui-hide">重传</button>'
+                            , '<button class="layui-btn layui-btn-xs layui-btn-danger demo-delete">删除</button>'
+                            , '</td>'
+                            , '</tr>'].join(''));
+
+                        //单个重传
+                        tr.find('.demo-reload').on('click', function () {
+                            obj.upload(index, file);
+                        });
+
+                        //删除
+                        tr.find('.demo-delete').on('click', function () {
+                            delete files[index]; //删除对应的文件
+                            tr.remove();
+                            uploadListIns.config.elem.next()[0].value = ''; //清空 input file 值，以免删除后出现同名文件不可选
+                        });
+
+                        demoListView.append(tr);
+                    });
+                }
+                , done: function (res, index, upload) {
+                    if (res.files.file) { //上传成功
+                        var tr = demoListView.find('tr#upload-' + index)
+                            , tds = tr.children();
+                        tds.eq(2).html('<span style="color: #5FB878;">上传成功</span>');
+                        tds.eq(3).html(''); //清空操作
+                        return delete this.files[index]; //删除文件队列已经上传成功的文件
+                    }
+                    this.error(index, upload);
+                }
+                , error: function (index, upload) {
+                    var tr = demoListView.find('tr#upload-' + index)
+                        , tds = tr.children();
+                    tds.eq(2).html('<span style="color: #FF5722;">上传失败</span>');
+                    tds.eq(3).find('.demo-reload').removeClass('layui-hide'); //显示重传
+                }
+            });
+
+
+
+    });
+</script>
+
+

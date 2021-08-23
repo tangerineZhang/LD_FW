@@ -1,0 +1,675 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@*<!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title></title>
+    </head>
+    <body>
+        <div>
+        bbbb
+        </div>
+    </body>
+    </html>*@
+
+<script src="~/Scripts/xm-select/dist/xm-select.js"></script>
+<style>
+    .layui-form-select dl dd.layui-this {
+        background-color: #409EFF !important;
+        color: #fff !important;
+    }
+
+    .layui-colla-title {
+        background-color: #fff;
+        color: #1e9fff;
+    }
+
+    .layui-form-select dl dd.layui-this {
+        background-color: #409EFF !important;
+        color: #fff !important;
+    }
+    .layui-laypage .layui-laypage-curr .layui-laypage-em {
+        background-color: #409EFF;
+    }
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">诉讼列表</div>
+        <div class="layui-form layui-card-header layuiadmin-card-header-auto">
+
+            <form class="layui-form" autocomplete="off" action="">
+                <div class="layui-form-item">
+
+
+                    <div class="layui-col-sm6 layui-col-md3">
+                        <div style="padding-top: 10px;">
+                            <div class="layui-form-item">
+                                <label class="layui-col-sm4" style="padding-left: 20px;">诉讼类型:</label>
+                                <div class=" layui-col-sm8">
+
+                                    <select name="LawStatustype" id="stautp" lay-filter="xmFilter">
+                                        <option value="">请选择诉讼类型</option>
+                                        <option value="主诉">主诉</option>
+                                        <option value="被诉">被诉</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*<div class="layui-col-sm6 layui-col-md3">
+                        <div style="padding-top: 10px;">
+                            <div class="layui-form-item">
+                                <label class="layui-col-sm4 " style="padding-left: 20px;">案件状态:</label>
+                                <div class="layui-col-sm8">
+                                    <select name="LawStatus" id="stau" lay-filter="xmFilter">
+                                        <option value="">请选择案件状态</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>*@
+
+
+                    <div class="layui-col-sm6 layui-col-md3">
+                        <div style="padding-top: 10px;">
+                            <div class="layui-form-item">
+                                <label class="layui-col-sm4 " style="padding-left: 20px;">审理阶段:</label>
+                                <div class="layui-col-sm8">
+                                    <select name="TrialState" id="stau" lay-filter="xmFilter">
+                                        <option value="">请选择案件状态</option>
+                                        <option value="一审">一审</option>
+                                        <option value="二审">二审</option>
+                                        <option value="再审">再审</option>
+                                        @*<option value="重复一审">重复一审</option>*@
+                                        <option value="执行">执行</option>
+                                        <option value="发回重审一审">发回重审一审</option>
+                                        <option value="重审二审">重审二审</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-sm6 layui-col-md3">
+                        <div style="padding-top: 10px;">
+                            <div class="layui-form-item">
+                                <label class="layui-col-sm4 " style="padding-left: 20px;">案件类型:</label>
+                                <div class="  layui-col-sm8">
+                                    <select name="LawType" id="type" lay-filter="xmFilter">
+                                        <option value="">请选择案件类型</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-sm6 layui-col-md3">
+                        <div style="padding-top: 10px;">
+                            <div class="layui-form-item">
+                                <label class="layui-col-sm4 " style="padding-left: 20px;">案件等级:</label>
+                                <div class="  layui-col-sm8" style="padding-right: 15px;">
+                                    <select name="LawGrade" id="gra" lay-filter="xmFilter">
+                                        <option value="">请选择案件等级</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="layui-collapse" lay-filter="component-panel">
+                        <div class="layui-colla-item">
+                            <h2 class="layui-colla-title">高级筛选:<i class="layui-icon layui-colla-icon"></i></h2>
+                            <div class="layui-colla-content" style="height:100px;">
+
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div class="layui-card">
+                                        <label class="layui-col-sm4 " style="padding-left: 20px; padding-top: 10px;">代理律师:</label>
+                                        <div class="  layui-col-sm8">
+                                            <div class="xm-select-demo" name="Llawyer" id="demo9">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div class="layui-card">
+                                        <label class="layui-col-sm4 " style="padding-left: 20px;    padding-top: 10px;">代理律所:</label>
+                                        <div class="  layui-col-sm8">
+                                            <div class="xm-select-demo" name="LawFirm" id="demo8">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div class="layui-card">
+                                        <label class="layui-col-sm4 " style="padding-left: 20px;    padding-top: 10px;">立案日期:</label>
+                                        <div class=" layui-col-sm8">
+                                            <input type="text" class="layui-input test-item" name="FilingDate" id="test1" placeholder="立案日期始">
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div class="layui-card">
+                                        <label class="layui-col-sm4 " style="padding-left: 20px;    padding-top: 10px;">至:</label>
+                                        <div class=" layui-col-sm8">
+                                            <input type="text" class="layui-input test-item" name="FilingDate" id="test2" placeholder="立案日期尾">
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div style="padding-top: 10px;">
+                                        <div class="layui-form-item">
+                                            <label class="layui-col-sm4" style="padding-left: 10px;    padding-top: 10px;">所属事业部:</label>
+                                            <div class=" layui-col-sm8">
+                                                <div id="demo1" name="Department" class="xm-select-demo"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div style="padding-top: 10px;">
+                                        <label class="layui-col-sm4" style="padding-left: 20px; padding-top: 10px;">案号:</label>
+                                        <div class=" layui-col-sm8">
+
+                                            <input type="text" id="Caseid" name="CaseNo" lay-verify="title" autocomplete="off" placeholder="请输入案号或案件名称" class="layui-input">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div style="padding-top: 10px;">
+                                        <label class="layui-col-sm4" style="padding-left: 10px;    padding-top: 10px;">列表状态</label>
+                                        <div class=" layui-col-sm8">
+                                            <select name="status" id="stautp" lay-filter="xmFilter">
+                                                <option value="全部">全部</option>
+                                                <option value="在办">在办</option>
+                                                <option value="结案">结案</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="layui-col-sm6 layui-col-md3">
+                                    <div style="padding-top: 10px;">
+                                        <label class="layui-col-sm4" style="padding-left: 10px;    padding-top: 10px;">对接法务</label>
+                                        <div class=" layui-col-sm8">
+                                                <div class="xm-select-demo" name="LawUserID" id="demo10">
+                                               
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="layui-col-sm6 layui-col-md12">
+                        <div>
+                            <div class="layui-card-header" style="text-align: center;">
+                                <button class="layui-btn layuiadmin-btn-order layui-btn-normal" type="button" id="reloadBtn" lay-submit lay-filter="LAY-app-order-search">
+                                    <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>筛选
+                                </button>
+
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+
+    <div class="layui-card">
+        <div class="layui-form-item">
+            @*<a class="layui-btn layuiadmin-btn-order layui-btn-normal" onclick="loadPage_onclick()">添加</a>*@
+            @if (ViewData["Role2"].ToString().Contains("A") == true)
+            {
+                <a class="layui-btn layuiadmin-btn-order layui-btn-normal" target="_blank" href="http://bpmtest.lvdu-dc.com:82/Workflow/MTStart.aspx?processID=4150"><i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>案件申请</a>
+            }
+                <table id="lawList" class="layui-table" lay-filter="lawList"></table>
+            </div>
+    </div>
+
+ 
+    <script type="text/html" id="barDemo">
+        @if (ViewData["Role2"].ToString().Contains("=")==true)
+        {
+            <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">查看</a>
+        }
+        @if (ViewData["Role2"].ToString().Contains("U")==true)
+        {
+            <a class="layui-btn layui-btn-xs" lay-event="edit">编辑</a>
+        }
+        @if (ViewData["Role2"].ToString().Contains("D")==true)
+        {
+            <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+        }
+    </script>
+    
+
+    <script type="text/html" id="sexTpl">
+
+        {{#  if(d.times < 7){ }}
+        <i class="layui-icon layui-icon-circle-dot" style="font-size: 20px; color: #FF9800;padding-right:30px"></i>
+
+        {{#  } else if(d.times < 14) { }}
+        <i class="layui-icon layui-icon-circle-dot" style="font-size: 20px; color: #4CAF50;padding-right:30px"></i>
+
+        {{#  } else{ }}
+        <i class="layui-icon layui-icon-circle-dot" style="font-size: 20px; color: red;padding-right:30px"></i>
+
+        {{#  }  }}
+    </script>
+
+    <script>
+        layui.use(['table', 'laydate', 'form'], function () {
+            var table = layui.table;
+            var laydate = layui.laydate;
+            var index = layer.load(2); //添加laoding,0-2两种方式
+            var form = layui.form;
+            //同时绑定页面多个日期控件
+            lay('.test-item').each(function () {
+                laydate.render({
+                    elem: this
+                    , trigger: 'click'
+                    , theme: '#409EFF'
+                });
+            });
+
+            ////展示已知数据
+            table.render({
+                elem: '#lawList'
+                //, skin: 'row' //行边框风格
+                //, skin: 'line' //行边框风格
+                , even: false //开启隔行背景
+                , url: '/Law/SelectLaw'
+                //, toolbar: '#toolbarDemo'
+                , title: '案件详情'
+                , loading: true
+                , height: 'full-235' //高度最大化减去差值
+                , totalRow: true
+                , cols: [[ //标题栏
+                    { type: 'numbers', title: '序号', width: 50}
+                    , { field: 'Grade', title: '案件等级', width: 50 }
+                    , { field: 'TrialState', title: '审理阶段', width: 100 }
+                    , { field: 'LawStatus', title: '案件状态', width: 150 }
+                    , { field: 'LawName', title: '案件名称', minWidth: 200}
+                    , { field: 'Department', title: '所属事业部', width: 120 }
+                    , { field: 'LawType', title: '案件类型', minWidth: 180}
+                    , { field: 'FilingDate', title: '立案时间', width: 120, templet: '<div>{{ FormDate(d.FilingDate, "yyyy-MM-dd") }}</div>' }
+                    , { field: 'AmountInvolved', title: '涉案金额', width: 120}
+                  //  , { field: 'times', title: '红绿灯', width: 100, align: 'center', sort: true, templet: '#sexTpl' }
+                    , { field: 'times', title: '执行天数', width: 100, align: 'center' }
+                    , { title: '操作', toolbar: '#barDemo', align: 'center', fixed: 'right', width: 180 }
+                ]]
+                , page: true //是否显示分页
+                , limits: [10, 20, 50]
+                , limit: 20 //每页默认显示的数量
+                , done: function (res) {
+                    layer.close(index);    //返回数据关闭loading
+                 
+                }
+            });
+            $("#reloadBtn").click(function (ev) {
+                //alert('1');
+
+                var tag1 = $('select[name="TrialState"] option:selected').val();
+                var tag15 = $('select[name="status"] option:selected').val();
+                var tag2 = demo1.getValue('name');
+                var tag3 = $('select[name="LawType"] option:selected').val();
+                var tag4 = $('select[name="LawGrade"] option:selected').val();
+                var tag5 = $("#test1").val();
+                var tag6 = $("#test2").val();
+                var tage7 = $("#Caseid").val(); 
+                var tage8 = $('select[name="LawStatustype"] option:selected').val();
+                var tag9 = demo7.getValue("value");
+                var tag10 = demo8.getValue("value");
+                var tag16 = demo11.getValue("value");
+
+             
+                //alert(tag9);
+                //alert(tag10);
+               // alert($("#test2").val());
+                //alert(decodeURIComponent(tag2));
+                //alert(keyWord);
+                table.reload('lawList', {
+                    url: '/Law/SelectLawLook'
+                    , where: {
+                        tag1: decodeURIComponent(tag1),
+                        tag2: decodeURIComponent(tag2),
+                        tag3: decodeURIComponent(tag3),
+                        tag4: decodeURIComponent(tag4),
+                        tag5: tag5,
+                        tag6: tag6,
+                        tag7: decodeURIComponent(tage7),
+                        tag8: decodeURIComponent(tage8),
+                        tag9: decodeURIComponent(tag9),
+                        tag10: decodeURIComponent(tag10),
+                        tag15: decodeURIComponent(tag15),
+                        tag16: decodeURIComponent(tag16)
+
+                    } //设定异步数据接口的额外参数
+                });
+            })
+
+
+
+
+            //监听工具条
+            table.on('tool(lawList)', function (obj) {
+                var data = obj.data;
+                if (obj.event === 'detail') {
+                    window.parent.layui.index.openTabsPage('/Law/LawInfo?id=' + data.ID, "查看案件详情");
+                    //layer.msg('ID：' + data.SID + ' 的查看操作');
+                    //alert(data.CorporationVersionID);
+                } else if (obj.event === 'del') {
+                    var delIndex = layer.confirm('确认删除案件为' + obj.data.LawName + "的信息吗?", function (delIndex) {
+                        $.ajax({
+                            url: '/Law/DeletePeoperLaw',
+                            type: "post",
+                            data: { ID: obj.data.ID},
+                            success: function (suc) {
+                                if (suc > 0) {
+                                    obj.del(); //删除对应行（tr）的DOM结构，并更新缓存
+                                    layer.close(delIndex);
+                                    console.log(delIndex);
+                                    layer.msg("删除成功");
+                                } else {
+                                    layer.msg("删除失败");
+                                }
+                            }
+                        });
+                        layer.close(delIndex);
+                    });
+                    //layer.confirm('真的删除行么', function (index) {
+                    //    obj.del();
+                    //    layer.close(index);
+                    //});
+                } else if (obj.event === 'edit') {
+                    //layer.alert('编辑行：<br>' + JSON.stringify(data))
+                    window.parent.layui.index.openTabsPage('/Law/UpdateLaw?id=' + data.ID, "修改案件");
+                }
+            });
+
+            //绑定事业部下拉框
+            $.ajax({
+                url: '/Law/BangDempart',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        $('#quiz').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+                    });
+                    layui.form.render("select");
+                    //重新渲染 固定写法
+                }
+            });
+
+            //绑定案件类型下拉框
+            $.ajax({
+                url: '/Law/BangLawType',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        $('#type').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+                    });
+                    layui.form.render("select");
+                    //重新渲染 固定写法
+                }
+            });
+            //绑定所有类型下拉框
+            //$.ajax({
+            //    url: '/Law/BangLawStatus',
+            //    dataType: 'json',
+            //    type: 'get',
+            //    success: function (data) {
+            //        $.each(data, function (index, item) {
+            //            $('#stau').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+            //        });
+            //        layui.form.render("select");
+            //        //重新渲染 固定写法
+            //    }
+            //});
+
+
+            //绑定案件等级下拉框
+            $.ajax({
+                url: '/Law/BangGrade',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        $('#gra').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+                    });
+                    layui.form.render("select");
+                    //重新渲染 固定写法
+                }
+            });
+
+            var demo11 = xmSelect.render({
+                el: '#demo10',
+                filterable: true,
+                clickClose: true,
+                theme: {
+                    color: '#409EFF',
+                },
+                name: 'LawUserID',
+
+                remoteSearch: true,
+                radio: true,
+                showCount: 50,
+                searchTips: "输入名字",
+                remoteMethod: function (val, cb, show) {
+                    //需要回传一个数组
+                    $.ajax({
+                        type: 'post',
+                        url: '/Law/SelectplainAll',
+                        data: { keyword: val },
+                        dataType: 'json',
+
+                        success: function (data) {
+                            var res = data;
+                            console.log(data);
+                            cb(res.data)
+                        },
+                        error: function myfunction() {
+                            cb([]);
+                        }
+                    });
+                },
+                data: []
+
+            });
+            //绑定诉讼类型下拉框
+            $.ajax({
+                url: '/Law/BangsuitType',
+                dataType: 'json',
+                type: 'get',
+                success: function (data) {
+                    $.each(data, function (index, item) {
+                        $('#suit').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+
+                    });
+                    layui.form.render("select");
+                    //重新渲染 固定写法
+                }
+            });
+
+
+
+
+        });
+
+
+        var demo1 = xmSelect.render({
+            el: '#demo1',
+            theme: {
+                color: '#409EFF',
+            },
+            size: 'medium',
+            type: 'block',
+            tips: '请选择事业部',
+            //style: { width: '212px',height:'38px', },
+            autoRow: false,
+            model: {
+                label: {
+                    type: 'block',
+                    block: {
+                        //最大显示数量, 0:不限制
+                        showCount: 2,
+                        //是否显示删除图标
+                        showIcon: false,
+                    }
+                }
+            },
+            data: []
+        });
+        $.ajax({
+            url: '/Law/BangDempart',
+            dataType: 'json',
+            type: 'get',
+            success: function (res) {
+                console.log(res.data);
+                demo1.update({
+                    data: res.data,
+                    autoRow: true,
+                })
+
+            }
+        });
+
+
+            var demo8 = xmSelect.render({
+        el: '#demo9',
+                filterable: true,
+                theme: {
+                    color: '#409EFF',
+                },
+        clickClose: true,
+        name: 'Llawyer',
+        style: { width: '100%' },
+        remoteSearch: true,
+        radio: true,
+        showCount: 50,
+        searchTips: "输入名字",
+        remoteMethod: function (val, cb, show) {
+            //需要回传一个数组
+            $.ajax({
+                type: 'post',
+                url: '/Law/SelectLlawyerAll',
+                data: { keyword: val },
+                dataType: 'json',
+
+                success: function (data) {
+                    var res = data;
+                    console.log(data);
+                    cb(res.data)
+                },
+                error: function myfunction() {
+                    cb([]);
+                }
+            });
+        },
+        data: []
+            });
+
+        var demo7 = xmSelect.render({
+            el: '#demo8',
+            filterable: true,
+            clickClose: true,
+            theme: {
+                color: '#409EFF'
+            },
+            name: 'LawFirm',
+            style: { width: '100%' },
+            remoteSearch: true,
+            radio: true,
+            showCount: 50,
+            searchTips: "输入名字",
+            remoteMethod: function (val, cb, show) {
+                //需要回传一个数组
+                $.ajax({
+                    type: 'post',
+                    url: '/Law/SelectLawFirmAll',
+                    data: { keyword: val },
+                    dataType: 'json',
+
+                    success: function (data) {
+                        var res = data;
+                        console.log(data);
+                        cb(res.data)
+                    },
+                    error: function myfunction() {
+                        cb([]);
+                    }
+                });
+            },
+            data: []
+        });
+
+
+
+
+
+        function loadPage_onclick() {
+            //$('#content').load($(this).data("link"));
+            window.open
+          //  window.location.href = "http://newoa.lvdu-dc.com/Workflow/MTStart.aspx?processID=4150";
+            window.parent.layui.index.openTabsPage('/Law/AddLawCase?id=', "新增案件");
+        };
+
+        //function LayInfoPage_onclick() {
+        //    //$('#content').load($(this).data("link"));
+        //    window.parent.layui.index.openTabsPage('/Law/LawInfo?id=', "查看案件详情");
+        //};
+    </script>
+
+    <script>
+        function FormDate(str, fmt) { //str: 日期字符串；fmt:格式类型
+            if (str == null || str == '') {
+                return "";
+            }
+            var date = eval('new ' + str.substr(1, str.length - 2)); //截取字符串之后：Date(1572490889017)
+            var o = {
+                "M+": date.getMonth() + 1, //月份
+                "d+": date.getDate(), //日
+                "H+": date.getHours(), //小时
+                "m+": date.getMinutes(), //分
+                "s+": date.getSeconds(), //秒
+                "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+                "S": date.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        }
+
+    </script>
+

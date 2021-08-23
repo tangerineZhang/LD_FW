@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="LDFW.DAL.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="LDFW_DAL_AuthService1_Auth" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://rysso.lvdu-dc.com/Service/Auth.asmx</Value>
+    </Setting>
+    <Setting Name="LDFW_DAL_AuthServiec_Auth" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">http://zsjtest.lvdu-dc.com:83/Service/Auth.asmx</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

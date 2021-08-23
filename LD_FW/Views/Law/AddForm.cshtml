@@ -1,0 +1,331 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+
+<style>
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }
+
+    .layui-form-item .layui-inline {
+        margin-bottom: 0px;
+        margin-right: 10px;
+    }
+
+    .layui-form-select dl dd.layui-this {
+        background-color: #409EFF !important;
+        color: #fff !important;
+    }
+    /*.site-demo-button div {
+        margin: 20px 30px 10px;
+    }
+
+    .layui-elem-field legend {
+        margin-left: 20px;
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }*/
+
+    .layui-form-label {
+        float: left;
+        display: block;
+        padding: 9px 15px;
+        font-weight: 400;
+        line-height: 18px;
+        width: 120px;
+        text-align: right;
+    }
+
+    .layui-input-block {
+        margin-left: 150px;
+        min-height: 36px;
+    }
+    em{
+       color:red;
+    }
+
+
+    /*.layui-form-item {
+        margin-bottom: 15px;
+        clear: both;
+        border-bottom: solid 1px #dedede;
+        *zoom: 1;
+    }*/
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">任务跟进流程</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">任务负责人<em>*</em></label>
+                    <div class="layui-input-block" style="width:191px">
+                        <div class="xm-select-demo"  name="TaskPerson" id="demo9">
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">业务负责人<em>*</em></label>
+                    <div class="layui-input-block" style="width:191px">
+                        <div class="xm-select-demo"  name="YewuPerson" id="demo10">
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item">
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">任务办结日期<em>*</em></label>
+                        <div class="layui-input-block">
+                            <input type="text" lay-verify="required" class="layui-input test-item" name="TaskTime" id="test1" placeholder="yyyy-MM-dd" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+
+
+                @*<div class="layui-form-item">
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">实际完成日期</label>
+                        <div class="layui-input-block">
+                            <input type="text"  class="layui-input test-item" name="TaskEndTime" id="test1" placeholder="yyyy-MM-dd" style="width:191px">
+                        </div>
+                    </div>
+                </div>*@
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">任务要求<em>*</em></label>
+                    <div class="layui-input-block">
+                        <textarea name="TaskAsk" lay-verify="required" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+                @*<div class="layui-form-item">
+                    <label class="layui-form-label">任务反馈</label>
+                    <div class="layui-input-block">
+                        <textarea name="TaskFwwdback" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>*@
+
+
+                <div class="layui-form-item layui-layout-admin">
+                    <div class="layui-input-block">
+                        <div class="layui-footer" style="left: 0;">
+                            <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="component-form-demo1"> <i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>发起</button>
+                            <a href="@ViewData["Bpmurl"]" id="url" class="layui-btn" target="_blank">审批记录</a>
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="~/js/MyJS.js"></script>
+<script src="~/Scripts/xm-select/dist/xm-select.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+
+        //同时绑定页面多个日期控件
+        lay('.test-item').each(function () {
+            laydate.render({
+                elem: this
+                , trigger: 'click'
+            });
+        });
+
+
+
+
+
+        //绑定结案类型下拉
+        $.ajax({
+            url: '/Law/BandSettleType',
+            dataType: 'json',
+            type: 'get',
+            success: function (data) {
+                $.each(data, function (index, item) {
+
+                    $('#Settle').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+                });
+
+                layui.form.render("select");
+                //重新渲染 固定写法
+            }
+        });
+
+
+        var demo8 = xmSelect.render({
+            el: '#demo9',
+            filterable: true,
+            clickClose: true,
+            theme: {
+                color: '#409EFF',
+            },
+            name: 'TaskPerson',
+            style: { width: '100%' },
+            remoteSearch: true,
+            radio: true,
+            showCount: 50,
+            searchTips: "输入名字",
+            remoteMethod: function (val, cb, show) {
+                //需要回传一个数组
+                $.ajax({
+                    type: 'post',
+                    url: '/Law/SelectplainAll',
+                    data: { keyword: val },
+                    dataType: 'json',
+
+                    success: function (data) {
+                        var res = data;
+                        console.log(data);
+                        cb(res.data)
+                    },
+                    error: function myfunction() {
+                        cb([]);
+                    }
+                });
+            },
+            data: []
+        });
+
+
+        var demo2 = xmSelect.render({
+            el: '#demo10',
+            filterable: true,
+            clickClose: true,
+            theme: {
+                color: '#409EFF',
+            },
+            name: 'YewuPerson',
+            style: { width: '100%' },
+            remoteSearch: true,
+            radio: true,
+            showCount: 50,
+            searchTips: "输入名字",
+            remoteMethod: function (val, cb, show) {
+                //需要回传一个数组
+                $.ajax({
+                    type: 'post',
+                    url: '/Law/SelectplainAll',
+                    data: { keyword: val },
+                    dataType: 'json',
+
+                    success: function (data) {
+                        var res = data;
+                        console.log(data);
+                        cb(res.data)
+                    },
+                    error: function myfunction() {
+                        cb([]);
+                    }
+                });
+            },
+            data: []
+        });
+
+        //监听提交
+        form.on('submit(component-form-demo1)', function (data) {
+            //layer.alert(JSON.stringify(data.field), {
+            //    title: '最终的提交信息'
+            //})
+            console.log(data.field);
+            console.log(data.field.TaskPerson);
+            //var id = getUrlParam("id");  //获取url中的id
+            //alert(id);
+            if (data.field.TaskPerson == "" || data.field.YewuPerson=="") {
+    
+                layer.msg('请输入必填项信息!', { icon: 2, time: 1000 });
+                return false;
+            }
+            //   document.getElementById("iframe").contentWindow.loadData($, laydate, data.id);
+
+
+
+            $.post('/Law/AddTask', { followUp: JSON.stringify(data.field) }, function (data) {
+                if (data != "") {
+                 
+                    layer.msg('操作成功!', { icon: 1, time: 2000 });
+                    setTimeout(function () {
+                        layer.close(layer.index);
+                        window.parent.open(data);
+                        window.parent.location.reload();
+                    }, 2000);
+                    //var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+                    //parent.layer.close(index); //再执行关闭
+                }
+                else {
+                    layer.msg('操作失败!', { icon: 2, time: 2000 });
+                }
+            });
+
+
+            // parent.layui.admin.events.closeThisTabs();
+
+            return false;
+        });
+    });
+
+
+</script>
+
+@*<script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            //常规用法
+            laydate.render({
+                elem: '#test1'
+            });
+            laydate.render({
+                elem: '#test2'
+            });
+
+            //国际版
+
+        });
+    </script>*@
+
+

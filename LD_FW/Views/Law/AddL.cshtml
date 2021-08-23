@@ -1,0 +1,252 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+
+<style>
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }
+
+    .layui-form-item .layui-inline {
+        margin-bottom: 0px;
+        margin-right: 10px;
+    }
+
+    .layui-form-select dl dd.layui-this {
+        background-color: #409EFF !important;
+        color: #fff !important;
+    }
+    /*.site-demo-button div {
+        margin: 20px 30px 10px;
+    }
+
+    .layui-elem-field legend {
+        margin-left: 20px;
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }*/
+
+    .layui-form-label {
+        float: left;
+        display: block;
+        padding: 9px 15px;
+        font-weight: 400;
+        line-height: 18px;
+        width: 120px;
+        text-align: right;
+    }
+    em {
+        color: red;
+    }
+    .layui-input-block {
+        margin-left: 150px;
+        min-height: 36px;
+    }
+
+
+    /*.layui-form-item {
+        margin-bottom: 15px;
+        clear: both;
+        border-bottom: solid 1px #dedede;
+        *zoom: 1;
+    }*/
+</style>
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        <div class="layui-card-header">案件结案申请</div>
+        <div class="layui-card-body" style="padding: 15px;">
+            <form class="layui-form" action="" lay-filter="component-form-group">
+
+
+                <div class="layui-form-item">
+
+                    <div class="layui-inline">
+                        <label class="layui-form-label">结案日期<em>*</em></label>
+                        <div class="layui-input-block">
+                            <input type="text" lay-verify="required" class="layui-input test-item" name="ClosingDate" id="test1" placeholder="yyyy-MM-dd" style="width:191px">
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">结案类型<em>*</em></label>
+                    <div class="layui-input-block" style="width:191px">
+                        <select name="SettleType" id="Settle" lay-verify="required" lay-filter="xmFilter">
+                            <option value=""></option>
+                        </select>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否涉及解封</label>
+                    <div class="layui-input-block ">
+                  
+                            <input type="radio" class="layui-input test-item "  name="IsDeblocking" id="IsDeblocking" value="1" lay-skin="primary" title="是">
+                            <input type="radio" class="layui-input test-item "  name="IsDeblocking" id="IsDeblocking" value="0" lay-skin="primary" title="否" checked="">
+                        </div>
+                    
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">是否涉及退费</label>
+                    <div class="layui-input-block ">
+                   
+                            <input type="radio" class="layui-input test-item "  name="IsPremium" id="IsPremium" value="1" lay-skin="primary" title="是">
+                            <input type="radio" class="layui-input test-item "  name="IsPremium" id="IsPremium" value="0" lay-skin="primary" title="否" checked="">
+                        </div>
+                  
+                </div>
+
+                <div class="layui-form-item">
+                    <label class="layui-form-label">结案处理结果<em>*</em></label>
+                    <div class="layui-input-block">
+                        <textarea name="SettleResult" placeholder="请输入内容" class="layui-textarea"></textarea>
+                    </div>
+                </div>
+
+
+                <div class="layui-form-item layui-layout-admin">
+                    <div class="layui-input-block">
+                        <div class="layui-footer" style="left: 0;">
+                            <button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="component-form-demo1"> <i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>提交</button>
+                            @*<a href="@ViewData["Bpmurl"]" id="url" class="layui-btn" target="_blank">审批记录</a>*@
+                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+
+
+        </div>
+    </div>
+</div>
+<script src="~/js/MyJS.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function () {
+        var form = layui.form
+            , layer = layui.layer
+            , layedit = layui.layedit
+            , laydate = layui.laydate;
+
+
+        //同时绑定页面多个日期控件
+        lay('.test-item').each(function () {
+            laydate.render({
+                elem: this
+                , trigger: 'click'
+            });
+        });
+
+
+
+    
+
+    //绑定结案类型下拉
+    $.ajax({
+        url: '/Law/BandSettleType',
+        dataType: 'json',
+        type: 'get',
+        success: function (data) {
+            $.each(data, function (index, item) {
+
+                $('#Settle').append(new Option(item.Name, item.Name));// 下拉菜单里添加元素
+            });
+
+            layui.form.render("select");
+            //重新渲染 固定写法
+        }
+    });
+
+
+
+
+
+    
+        //监听提交
+        form.on('submit(component-form-demo1)', function (data) {
+            //layer.alert(JSON.stringify(data.field), {
+            //    title: '最终的提交信息'
+            //})
+            console.log(data.field);
+            //var id = getUrlParam("id");  //获取url中的id
+            //alert(id);
+
+            //   document.getElementById("iframe").contentWindow.loadData($, laydate, data.id);
+
+
+
+            $.post('/Law/LawEnd', { followUp: JSON.stringify(data.field) }, function (data) {
+                if (data != "") {
+                    //alert('1');
+                    layer.msg('操作成功!', { icon: 1, time: 2000 });
+                    setTimeout(function () {
+                        layer.close(layer.index);
+                        window.parent.open(data);
+                        window.parent.location.reload();
+                        //location.href = "@ViewData["Bpmurl"]";
+                    }, 2000);
+                    //var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+
+                    //parent.layer.close(index); //再执行关闭
+                }
+                else {
+                    layer.msg('操作失败!', { icon: 2, time: 2000 });
+                }
+            });
+
+
+            // parent.layui.admin.events.closeThisTabs();
+
+            return false;
+        });
+    });
+
+ 
+</script>
+
+@*<script>
+        layui.use('laydate', function () {
+            var laydate = layui.laydate;
+
+            //常规用法
+            laydate.render({
+                elem: '#test1'
+            });
+            laydate.render({
+                elem: '#test2'
+            });
+
+            //国际版
+
+        });
+    </script>*@
+
+

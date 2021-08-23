@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="HelloWorld">
+        <s:complexType />
+      </s:element>
+      <s:element name="HelloWorldResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="HelloWorldResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Token" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetUserInfoByTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetUserInfoByTokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UserValidationSoapHeader" type="tns:UserValidationSoapHeader" />
+      <s:complexType name="UserValidationSoapHeader">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="UserName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="PassWord" type="s:string" />
+        </s:sequence>
+        <s:anyAttribute />
+      </s:complexType>
+      <s:element name="GetSysRequestToken">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="APPID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReceiveTokenUrl" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SecretKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetSysRequestTokenResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetSysRequestTokenResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="string" nillable="true" type="s:string" />
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="HelloWorldSoapIn">
+    <wsdl:part name="parameters" element="tns:HelloWorld" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldSoapOut">
+    <wsdl:part name="parameters" element="tns:HelloWorldResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByToken" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetUserInfoByTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByTokenUserValidationSoapHeader">
+    <wsdl:part name="UserValidationSoapHeader" element="tns:UserValidationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="GetSysRequestTokenSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSysRequestToken" />
+  </wsdl:message>
+  <wsdl:message name="GetSysRequestTokenSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSysRequestTokenResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetSysRequestTokenUserValidationSoapHeader">
+    <wsdl:part name="UserValidationSoapHeader" element="tns:UserValidationSoapHeader" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpGetIn" />
+  <wsdl:message name="HelloWorldHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByTokenHttpGetIn">
+    <wsdl:part name="Token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSysRequestTokenHttpGetIn">
+    <wsdl:part name="APPID" type="s:string" />
+    <wsdl:part name="ReceiveTokenUrl" type="s:string" />
+    <wsdl:part name="SecretKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSysRequestTokenHttpGetOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="HelloWorldHttpPostIn" />
+  <wsdl:message name="HelloWorldHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByTokenHttpPostIn">
+    <wsdl:part name="Token" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetUserInfoByTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSysRequestTokenHttpPostIn">
+    <wsdl:part name="APPID" type="s:string" />
+    <wsdl:part name="ReceiveTokenUrl" type="s:string" />
+    <wsdl:part name="SecretKey" type="s:string" />
+  </wsdl:message>
+  <wsdl:message name="GetSysRequestTokenHttpPostOut">
+    <wsdl:part name="Body" element="tns:string" />
+  </wsdl:message>
+  <wsdl:portType name="AuthSoap">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldSoapIn" />
+      <wsdl:output message="tns:HelloWorldSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByToken">
+      <wsdl:input message="tns:GetUserInfoByTokenSoapIn" />
+      <wsdl:output message="tns:GetUserInfoByTokenSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysRequestToken">
+      <wsdl:input message="tns:GetSysRequestTokenSoapIn" />
+      <wsdl:output message="tns:GetSysRequestTokenSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AuthHttpGet">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpGetIn" />
+      <wsdl:output message="tns:HelloWorldHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByToken">
+      <wsdl:input message="tns:GetUserInfoByTokenHttpGetIn" />
+      <wsdl:output message="tns:GetUserInfoByTokenHttpGetOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysRequestToken">
+      <wsdl:input message="tns:GetSysRequestTokenHttpGetIn" />
+      <wsdl:output message="tns:GetSysRequestTokenHttpGetOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="AuthHttpPost">
+    <wsdl:operation name="HelloWorld">
+      <wsdl:input message="tns:HelloWorldHttpPostIn" />
+      <wsdl:output message="tns:HelloWorldHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByToken">
+      <wsdl:input message="tns:GetUserInfoByTokenHttpPostIn" />
+      <wsdl:output message="tns:GetUserInfoByTokenHttpPostOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetSysRequestToken">
+      <wsdl:input message="tns:GetSysRequestTokenHttpPostIn" />
+      <wsdl:output message="tns:GetSysRequestTokenHttpPostOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="AuthSoap" type="tns:AuthSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByToken">
+      <soap:operation soapAction="http://tempuri.org/GetUserInfoByToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetUserInfoByTokenUserValidationSoapHeader" part="UserValidationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysRequestToken">
+      <soap:operation soapAction="http://tempuri.org/GetSysRequestToken" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+        <soap:header message="tns:GetSysRequestTokenUserValidationSoapHeader" part="UserValidationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AuthSoap12" type="tns:AuthSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HelloWorld">
+      <soap12:operation soapAction="http://tempuri.org/HelloWorld" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByToken">
+      <soap12:operation soapAction="http://tempuri.org/GetUserInfoByToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetUserInfoByTokenUserValidationSoapHeader" part="UserValidationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysRequestToken">
+      <soap12:operation soapAction="http://tempuri.org/GetSysRequestToken" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+        <soap12:header message="tns:GetSysRequestTokenUserValidationSoapHeader" part="UserValidationSoapHeader" use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AuthHttpGet" type="tns:AuthHttpGet">
+    <http:binding verb="GET" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByToken">
+      <http:operation location="/GetUserInfoByToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysRequestToken">
+      <http:operation location="/GetSysRequestToken" />
+      <wsdl:input>
+        <http:urlEncoded />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="AuthHttpPost" type="tns:AuthHttpPost">
+    <http:binding verb="POST" />
+    <wsdl:operation name="HelloWorld">
+      <http:operation location="/HelloWorld" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserInfoByToken">
+      <http:operation location="/GetUserInfoByToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetSysRequestToken">
+      <http:operation location="/GetSysRequestToken" />
+      <wsdl:input>
+        <mime:content type="application/x-www-form-urlencoded" />
+      </wsdl:input>
+      <wsdl:output>
+        <mime:mimeXml part="Body" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Auth">
+    <wsdl:port name="AuthSoap" binding="tns:AuthSoap">
+      <soap:address location="http://zsjtest.lvdu-dc.com:83/Service/Auth.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AuthSoap12" binding="tns:AuthSoap12">
+      <soap12:address location="http://zsjtest.lvdu-dc.com:83/Service/Auth.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AuthHttpGet" binding="tns:AuthHttpGet">
+      <http:address location="http://zsjtest.lvdu-dc.com:83/Service/Auth.asmx" />
+    </wsdl:port>
+    <wsdl:port name="AuthHttpPost" binding="tns:AuthHttpPost">
+      <http:address location="http://zsjtest.lvdu-dc.com:83/Service/Auth.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

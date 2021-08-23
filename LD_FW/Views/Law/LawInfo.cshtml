@@ -1,0 +1,1071 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<link href="~/layuiadmin/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layuiadmin/layui/layui.js"></script>
+<style>
+    /*.layui-fluid {
+        padding: 15px 15px 80px 15px;
+    }*/
+
+    .site-demo-button div {
+        margin: 20px 30px 10px;
+    }
+
+    .layui-elem-field legend {
+        margin-left: 20px;
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }
+
+    /*.layui-form-label {
+        float: left;
+        display: block;
+        padding: 9px 15px;
+        font-weight: 400;
+        line-height: 5px;
+        width: 160px;
+        text-align: right;
+        background-color: #e8e8e8;
+    }*/
+
+    .layui-form-label {
+        float: left;
+        display: block;
+        padding: 9px 14px;
+        font-weight: 400;
+        line-height: 18px;
+        border: 1px solid;
+        border-color: #e6e6e6;
+        width: 160px;
+        text-align: right;
+        background-color: #FBFBFB;
+        font-weight: bold;
+    }
+
+    .layui-form-item {
+        margin-bottom: 0px;
+        clear: both;
+        border-bottom: solid 1px #dedede;
+        *zoom: 1;
+    }
+
+    .layui-layout-admin .layui-footer {
+        background-color: #fff;
+    }
+
+
+    .layui-form-item .layui-inline {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-right: 10px;
+    }
+
+    .layui-input, .layui-select, .layui-textarea {
+        border-style: inherit;
+        background-color: #edfbf4;
+    }
+
+    .layui-inline span em {
+        padding-left: 5px;
+    }
+</style>
+
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        @{
+            System.Data.DataTable dt = (System.Data.DataTable)ViewData["dt"];
+            System.Data.DataTable dtLitig = (System.Data.DataTable)ViewData["dtLitig"];
+            System.Data.DataTable dtSeiz = (System.Data.DataTable)ViewData["dtSeiz"];
+            System.Data.DataTable dtLega = (System.Data.DataTable)ViewData["dtLega"];
+            System.Data.DataTable dtFile = (System.Data.DataTable)ViewData["dtFiles"];
+            <div class="layui-card-header">基本信息</div>
+
+            <div class="layui-card-body" style="padding: 15px;">
+
+                <div class="layui-form-item">
+                    <div class=" layui-col-md12">
+
+                        <label class="layui-form-label"><strong>案件名称:</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto ;"><em>@dt.Rows[0]["LawName"]</em></span>
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+
+                <div class="layui-form-item">
+                    <div class="layui-col-md4">
+
+
+                        <label class="layui-form-label"><strong>案号</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto ;"><em>@dt.Rows[0]["CaseNo"]</em></span>
+                        </div>
+
+                    </div>
+
+
+
+
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>案件等级</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["Grade"]</em></span>
+                        </div>
+
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label"><strong>对接法务</strong></label>
+                        <div class="layui-inline">
+
+                            <span style="width:auto"><em>@dt.Rows[0]["LawUserName"]</em></span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="layui-form-item">
+
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>代理律师</strong></label>
+                        <div class="layui-form-label-col">
+                            <span  style="width:auto"><em>@dt.Rows[0]["Lawyer"]</em></span>
+                        </div>
+
+                    </div>
+
+
+
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>代理律所</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["LawFirm"]</em></span>
+
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>受理法院及承办法官</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["Court"]</em></span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="layui-form-item">
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>诉讼类型</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["LawsuitType"]</em></span>
+                        </div>
+
+                    </div>
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>案件类型</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["LawType"]</em></span>
+                        </div>
+
+                    </div>
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>所属事业部</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["Department"]</em></span>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>原告</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["Plaintiff"]</em></span>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label"><strong>被告</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["Defendant"]</em></span>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label"><strong>第3人</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["TheThird"]</em></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>业务发起人</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["Creator"]</em></span>
+                        </div>
+
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label"><strong>业务发起日期</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["CreateDate"]</em></span>
+
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label"><strong>立案时间</strong></label>
+                        <div class="layui-form-label-col">
+                            @if (dt.Rows[0]["FilingDate"].ToString() == "1900/1/1 0:00:00" || dt.Rows[0]["FilingDate"].ToString() == "" || dt.Rows[0]["FilingDate"] == null)
+                            {
+                                <span style="width:auto"><em></em></span>
+                            }
+                            else
+                            {
+                                <span style="width:auto"><em>@dt.Rows[0]["FilingDate"]</em></span>
+                            }
+                        </div>
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label"><strong>审理阶段</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["TrialState"]</em></span>
+                        </div>
+                    </div>
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label"><strong>当前状态</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["LawStatus"]</em></span>
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>结案时间</strong></label>
+                        <div class="layui-form-label-col">
+                            @if (dt.Rows[0]["ClosingDate1"].ToString() == "1900/1/1 0:00:00" || dt.Rows[0]["ClosingDate1"].ToString() == "" || dt.Rows[0]["ClosingDate1"] == null)
+                            {
+                                <span style="width:auto"><em></em></span>
+                            }
+                            else
+                            {
+                                <span style="width:auto"><em>@dt.Rows[0]["ClosingDate1"]</em></span>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-form-item">
+
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label"><strong>是否涉及退费</strong></label>
+                        <div class="layui-form-label-col">
+
+                            @if (dt.Rows[0]["IsPremium"].ToString() == "1")
+                            {
+                                <span style="width:auto"><em>是</em></span>
+                            }
+                            else
+                            {
+                                <span style="width:auto"><em>否</em></span>
+                            }
+                        </div>
+                    </div>
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label"><strong>退费时间</strong></label>
+                        <div class="layui-form-label-col">
+                            @if (dt.Rows[0]["PremiumDate"].ToString() == "1900/1/1 0:00:00" || dt.Rows[0]["PremiumDate"].ToString() == "" || dt.Rows[0]["PremiumDate"] == null)
+                            {
+                                <span style="width:auto"><em></em></span>
+                            }
+                            else
+                            {
+                                <span style="width:auto"><em>@dt.Rows[0]["PremiumDate"]</em></span>
+                            }
+                        </div>
+                    </div>
+
+
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>责任人</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["PersonLiable"]</em></span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="layui-form-item">
+
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>是否涉及解封</strong></label>
+                        <div class="layui-form-label-col">
+                            @if (dt.Rows[0]["IsDeblocking"].ToString() == "1")
+                            {
+                                <span style="width:auto"><em>是</em></span>
+                            }
+                            else
+                            {
+                                <span style="width:auto"><em>否</em></span>
+                            }
+                        </div>
+
+                    </div>
+
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>解封时间</strong></label>
+                        <div class="layui-form-label-col">
+                            @if (dt.Rows[0]["DeblockingDate"].ToString() == "1900/1/1 0:00:00" || dt.Rows[0]["DeblockingDate"].ToString() == "" || dt.Rows[0]["DeblockingDate"] == null)
+                            {
+                                <span style="width:auto"><em></em></span>
+                            }
+                            else
+                            {
+                                <span style="width:auto"><em>@dt.Rows[0]["DeblockingDate"]</em></span>
+                            }
+                        </div>
+
+                    </div>
+                    <div class="layui-col-md4">
+
+                        <label class="layui-form-label"><strong>结案类型</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["SettleType"]</em></span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="layui-card-header">案情描述</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <form class="layui-form" action="" lay-filter="component-form-group">
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label"><strong>案情简介</strong></label>
+                        <div class="layui-form-label-col">
+
+                            <span style="width:auto">
+                                <em>
+                                   @dt.Rows[0]["Describe"]
+                                </em>
+                            </span>
+
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label"><strong>诉讼期望</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto">
+                                <em>
+                                    @dt.Rows[0]["Claims"]
+                                </em>
+                            </span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="layui-card-header">诉讼保全信息</div>
+            <table id="lawList1" class="layui-table" lay-filter="lawList1"></table>
+
+
+            <div class="layui-card-header">涉案金额（单位：万元）</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <form class="layui-form" action="" lay-filter="component-form-group">
+                    <div class="layui-form-item">
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>诉讼标的金额</strong></label>
+                            <div class="layui-form-label-col">
+                                @if (dt.Rows[0]["LawsuitType"].ToString() == "主诉")
+                                {
+                                    <span style="width:auto"><em></em></span>
+                                }
+                                else
+                                {
+                                    <span style="width:auto"><em>@dt.Rows[0]["ObjectAction"]</em></span>
+                                }
+
+
+                            </div>
+                        </div>
+
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>涉案金额</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["AmountInvolved"]</em></span>
+                            </div>
+                        </div>
+
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>法院判决/调解金额</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["Judgment"]</em></span>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>是否纳入考核</strong></label>
+                            <div class="layui-form-label-col">
+                                @if (dt.Rows[0]["IsAssess"].ToString() == "1")
+                                {
+                                    <span style="width:auto"><em>是</em></span>
+                                }
+                                else
+                                {
+                                    <span style="width:auto"><em>否</em></span>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item">
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>律师费</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["CounselFee"]</em></span>
+                            </div>
+                        </div>
+
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>诉讼费</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["LegalFee"]</em></span>
+                            </div>
+                        </div>
+
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>利息/违约金</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["InterestMoney"]</em></span>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>保全费</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["ResidueFee"]</em></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item" id="view1">
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>保函担保费</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["SecurityMoney"]</em></span>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>风险敞口</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["RiskExposure"]</em></span>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>已回款金额</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["ActualPayment"]</em></span>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>剩余欠款本金</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["ResidueFee"]</em></span>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="layui-form-item" id="view3">
+                        <div class="layui-col-md4">
+
+                            <label class="layui-form-label"><strong>单案件回款率(%)</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@Convert.ToDouble(Convert.ToDecimal(dt.Rows[0]["CollectionRate"]) * 100)% </em></span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="layui-form-item" id="view2">
+
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>保函单保费</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["SecurityMoney"]</em></span>
+                            </div>
+                        </div>
+
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>止损率</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@Convert.ToDouble(Convert.ToDecimal(dt.Rows[0]["StopLossRate"])*100)%</em></span>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>实际赔付金额</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["Compensation"]</em></span>
+                            </div>
+                        </div>
+                        <div class="layui-col-md3">
+
+                            <label class="layui-form-label"><strong>减损额</strong></label>
+                            <div class="layui-form-label-col">
+                                <span style="width:auto"><em>@dt.Rows[0]["Impairments"]</em></span>
+                            </div>
+                        </div>
+
+                        @*<div class="layui-col-xs3">
+                            </div>*@
+                    </div>
+
+
+                </form>
+            </div>
+
+
+
+            <div class="layui-card-header">诉讼费用（单位：万元）</div>
+            <table id="lawList2" class="layui-table" lay-filter="lawList2"></table>
+
+            <div class="layui-card-header">律师费用</div>
+            <table id="lawList3" class="layui-table" lay-filter="lawList3"></table>
+
+            <div class="layui-card-header">附件</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                @for (int i = 0; i < dtFile.Rows.Count; i++)
+                {
+
+                    <form class="layui-form" action="" lay-filter="component-form-group">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <label class="layui-form-label"><strong>@dtFile.Rows[i]["FileType"]</strong></label>
+
+                                <span style="width:auto;cursor:pointer;"><a style="color:blue" onclick="DownLode('@dtFile.Rows[i]["FilePath"]','@dtFile.Rows[i]["FileName"]','@dtFile.Rows[i]["FileFormat"]')"> <em>@dtFile.Rows[i]["FileName"]</em></a></span>
+                            </div>
+                        </div>
+
+                    </form>
+                }
+            </div>
+            <div class="layui-card-header">解决方案</div>
+
+
+
+            <div class="layui-card-body" style="padding: 15px;">
+                <form class="layui-form" action="" lay-filter="component-form-group">
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label"><strong>解决思路</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["Solutions"].ToString()</em></span>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label"><strong>风险分析</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["VentureFenxi"]</em></span>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label"><strong>结果预测</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["Prediction"]</em></span>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+
+                        <label class="layui-form-label"><strong>结案处理结果</strong></label>
+                        <div class="layui-form-label-col">
+                            <span style="width:auto"><em>@dt.Rows[0]["SettleResult"]</em></span>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-card-header">解决方案/跟进记录</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <script type="text/html" id="barDemo">
+                    {{#  if(d.LawType == "信息更改跟进" ){ }}
+                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detail">历史信息</a>
+                    {{#  } else { }}
+
+                    {{#  }}}
+                    {{#  if(d.LawType == "案件结案跟进" ){ }}
+                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detaillink">流程链接</a>
+                    {{#  } else { }}
+
+                    {{#  }}}
+
+                    {{#  if(d.LawType == "任务事项跟进" ){ }}
+                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detailTank">流程链接</a>
+                    {{#  } else { }}
+
+                    {{#  }}}
+                    @*{{#  if(d.LawType == "法务用印跟进" ){ }}
+                    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="detailSeal">流程链接</a>
+                    {{#  } else { }}
+
+                    {{#  }}}*@
+
+                </script>
+                <form class="layui-form" action="" lay-filter="component-form-group">
+
+                    <div class="layui-form-item">
+                        <div class="layui-inline">
+                            <table id="lawList" class="layui-table" lay-filter="lawList"></table>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-layout-admin">
+                        <div class="layui-input-block">
+                            <div class="layui-footer" style="left: 0;">
+                                @if (ViewData["Role3"].ToString().Contains("(") == true)
+                                {
+                                    <a class="layui-btn layuiadmin-btn-order layui-btn-normal" target="_blank" href="http://bpmtest.lvdu-dc.com:82/Workflow/MTStart.aspx?processID=4569"><i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>用印申请</a>
+                                }
+                                @if (ViewData["Role3"].ToString().Contains(")") == true)
+                                {
+                                    <button id="btnreset" type="reset" class="layui-btn layui-btn-primary">任务跟进</button>
+                                }
+                                @if (ViewData["Role3"].ToString().Contains("[") == true)
+                                {
+                                    <button id="btnAlert" class="layui-btn layui-btn-primary" data-type="test1" type="button">案件结案</button>
+                                }
+                                @*<button class="layui-btn layui-btn-normal" lay-submit="" lay-filter="component-form-demo1"> <i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>用印申请</button>*@
+                                @if (ViewData["Role3"].ToString().Contains("]") == true)
+                                {
+                                    <button id="btnPage" class="layui-btn layui-btn-normal" data-type="test5" type="button"><i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>添加跟进记录</button>
+                                }
+
+
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
+@*<script>
+        layui.config({
+            base: '../../layuiadmin/' //静态资源所在路径
+        }).extend({
+            index: 'lib/index' //主入口模块
+        }).use(['index'], function () {
+            var $ = layui.$
+                , admin = layui.admin
+                , element = layui.element
+                , layer = layui.layer;
+
+            element.render();
+
+            /* 触发弹层 */
+            var active = {
+                test1: function () {
+                    layer.alert('你好，体验者');
+                }
+                , test5: function () {
+                    layer.open({
+                        title: '页面层'
+                        , type: 1
+                        //,skin: 'layui-layer-rim'
+                        , shadeClose: true
+                        , area: admin.screen() < 2 ? ['80%', '300px'] : ['700px', '500px']
+                        , content: '<div style="padding: 20px;">放入任意HTML</div>'
+                    });
+                }
+            };
+
+            $('#btnAlert').on('click', function () {
+                var type = $(this).data('type');
+                alert(type);
+                active[type] && active[type].call(this);
+            });
+
+        });
+
+
+    </script>*@
+<script>
+
+
+
+
+    if ("@dt.Rows[0]["LawsuitType"]" == "主诉") {
+
+        $("#view2").hide();
+        $("#view4").hide();
+    }
+    else {
+        $("#view1").hide();
+        $("#view3").hide();
+    }
+
+
+    function getQueryVariable(variable) {
+        var query = window.location.search.substring(1);
+        var vars = query.split("&");
+        for (var i = 0; i < vars.length; i++) {
+            var pair = vars[i].split("=");
+            if (pair[0] == variable) { return pair[1]; }
+        }
+        return (false);
+    }
+
+    var ID = getQueryVariable("id");
+    layui.use('table', function () {
+        var table = layui.table;
+
+        ////展示已知数据
+
+        table.render({
+            elem: '#lawList1'
+            , skin: 'line' //行边框风格
+            , even: true //开启隔行背景
+            , url: '/Law/SelectPreser?ID=' + ID
+            //, toolbar: '#toolbarDemo'
+            , title: '诉讼保全'
+            , loading: true
+            , totalRow: true
+            , cols: [[ //标题栏
+                { field: 'rowid', title: '序号', width: 80, sort: true }
+                , { field: 'Applicant', title: '申请人', width: 100, sort: true }
+                , { field: 'Respondent', title: '被申请人', width: 100, sort: true }
+                , { field: 'LPCourt', title: '保全法院', minWidth: 140, sort: true }
+                , { field: 'LPDate', title: '保全日期', width: 120, sort: true, templet: '<div>{{ FormDate(d.LPDate, "yyyy-MM-dd") }}</div>' }
+                , { field: 'PCost', title: '保全金额', width: 180, sort: true }
+                , { field: 'PInformation', title: '保全资产信息', minwidth: 140, sort: true}
+               // , { field: 'times', title: '红绿灯', width: 100, align: 'center', sort: true, templet: '#sexTpl' }
+                //, { title: '操作', toolbar: '#barDemo', align: 'center', fixed: 'right', width: 180 }
+            ]]
+            , page: true //是否显示分页
+            , limits: [10, 20, 50]
+            , limit: 10 //每页默认显示的数量
+        });
+
+
+
+            ////展示已知数据
+
+            table.render({
+                elem: '#lawList2'
+                , skin: 'line' //行边框风格
+                , even: true //开启隔行背景
+                , url: '/Law/SelectLegalCosts?ID=' + ID
+                //, toolbar: '#toolbarDemo'
+                , title: '诉讼费用'
+                , loading: true
+                , totalRow: true
+                , cols: [[ //标题栏
+                    { field: 'rowid', title: '序号', width: 80, sort: true }
+                    , { field: 'LCType', title: '诉讼费用类型', width: 140, sort: true }
+                    , { field: 'LegalCosts', title: '诉讼费用', width: 140, sort: true }
+                    , { field: 'LCPaymentDate', title: '诉讼费用支付时间', minWidth: 140, sort: true, templet: '<div>{{ FormDate(d.LCPaymentDate, "yyyy-MM-dd") }}</div>'}
+                    //, { field: 'LPDate', title: '保全日期', width: 120, sort: true }
+                    //, { field: 'PCost', title: '保全金额', width: 180, sort: true }
+                    //, { field: 'PInformation', title: '保全资产信息', minwidth: 140, sort: true }
+                    // , { field: 'times', title: '红绿灯', width: 100, align: 'center', sort: true, templet: '#sexTpl' }
+                    //, { title: '操作', toolbar: '#barDemo', align: 'center', fixed: 'right', width: 180 }
+                ]]
+                , page: true //是否显示分页
+                , limits: [10, 20, 50]
+                , limit: 10 //每页默认显示的数量
+            });
+
+
+        table.render({
+            elem: '#lawList3'
+            , skin: 'line' //行边框风格
+            , even: true //开启隔行背景
+            , url: '/Law/SelectLawyer?ID=' + ID
+            //, toolbar: '#toolbarDemo'
+            , title: '律师费用'
+            , loading: true
+            , totalRow: true
+            , cols: [[ //标题栏
+                { field: 'rowid', title: '序号', width: 80, sort: true }
+                , { field: 'LawyerType', title: '律师费用类型', width: 140, sort: true }
+                , { field: 'AttorneyFees', title: '律师费用', width: 140, sort: true }
+                , { field: 'LawyerPaymentDate', title: '律师费用支付时间', minWidth: 140, sort: true, templet: '<div>{{ FormDate(d.LawyerPaymentDate, "yyyy-MM-dd") }}</div>' }
+                //, { field: 'LPDate', title: '保全日期', width: 120, sort: true }
+                //, { field: 'PCost', title: '保全金额', width: 180, sort: true }
+                //, { field: 'PInformation', title: '保全资产信息', minwidth: 140, sort: true }
+                // , { field: 'times', title: '红绿灯', width: 100, align: 'center', sort: true, templet: '#sexTpl' }
+                //, { title: '操作', toolbar: '#barDemo', align: 'center', fixed: 'right', width: 180 }
+            ]]
+            , page: true //是否显示分页
+            , limits: [10, 20, 50]
+            , limit: 10 //每页默认显示的数量
+        });
+
+
+
+        table.render({
+            elem: '#lawList'
+
+            , even: true //开启隔行背景
+            , url: '/Law/SelectFollowUp'
+            //, toolbar: '#toolbarDemo'
+            , title: '案件详情'
+            , loading: true
+            , totalRow: true
+            , cols: [[ //标题栏
+                { type: 'numbers', title: '序号' }
+                , { field: 'FollowUpDate', title: '跟进时间', width: 140, sort: true, templet: '<div>{{ FormDate(d.FollowUpDate, "yyyy-MM-dd") }}</div>' }
+                , { field: 'FUStatus', title: '跟进状态', width: 120 }
+                , { field: 'PersonFollowUp', title: '跟进人', width: 120 }
+                , { field: 'FollowUpInfo', title: '跟进情况', minwidth: 430 }
+                , { field: 'LawType', title: '跟进来源', minwidth: 150 }
+                //, { field: 'PersonLiable', title: '责任人', Width: 120 }
+                , { field: 'NextDate', title: '下一次跟进时间', width: 140, templet: '<div>{{ FormDate(d.NextDate, "yyyy-MM-dd") }}</div>'}
+
+
+                //, { field: 'FilingDate', title: '立案时间', width: 80, sort: true, templet: '<div>{{ FormDate(d.FilingDate, "yyyy-MM-dd HH:mm:ss") }}</div>' }
+                //, { field: 'AmountInvolved', title: '涉案金额', width: 80 }
+                //, { field: 'times', title: '红绿灯', width: 100, align: 'center', sort: true, templet: '#sexTpl' }
+                , { title: '操作', toolbar: '#barDemo', align: 'center', fixed: 'right', width: 180 }
+            ]]
+            , page: true //是否显示分页
+           , limits: [10, 20, 50]
+            , limit: 10 //每页默认显示的数量
+        });
+
+
+        //监听工具条
+        table.on('tool(lawList)', function (obj) {
+            var data = obj.data;
+            console.log(data);
+            if (obj.event === 'detail') {
+                window.parent.layui.index.openTabsPage('/Law/LawInfoLog?id=' + data.LogInfoID, "历史信息" + data.rowid + "");
+                //layer.msg('ID：' + data.SID + ' 的查看操作');
+                //alert(data.CorporationVersionID);
+            }
+            if (obj.event === 'detaillink') {
+
+                $.ajax({
+                    url: '/Law/GetUrltow',
+                    type: "post",
+                    data: { boid: data.ID },
+
+                    success: function (suc) {
+                        //alert(suc);
+                        window.parent.open(suc);
+                    }
+                });
+             
+             ///   layer.close(delIndex);
+           
+
+                // layer.msg('ID：' + data.ProcessUrl+ ' 的查看操作');
+               // window.parent.open(data.ProcessUrl);
+            //    window.parent.location.href = "" + data.ProcessUrl + "";
+            }
+
+            //if (obj.event === 'detailSeal') {
+            //    $.ajax({
+            //        url: '/Law/GetUrl',
+            //        type: "post",
+            //        data: { boid: data.ID },
+
+            //        success: function (suc) {
+            //            alert(suc);
+            //            window.parent.open(suc);
+            //        }
+            //    });
+            //}
+            if (obj.event === 'detailTank') {
+               // layer.msg('ID：' + data.ID + ' 的查看操作');
+              //  window.parent.open(data.ProcessUrl);
+                $.ajax({
+                    url: '/Law/GetUrl',
+                    type: "post",
+                    data: { boid: data.ID },
+                   
+                    success: function (suc) {
+                      //  alert(suc);
+                        window.parent.open(suc);
+                    }
+                });
+            }
+        });
+
+
+    });
+
+
+
+
+
+
+
+    //function AddCaseProgress_onclick(ids) {
+    //    //$('#content').load($(this).data("link"));
+    //    window.parent.layui.index.openTabsPage('/Law/AddCaseProgress?id=', "新增跟进记录");
+
+    //};
+
+    $('#btnPage').on('click', function () {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+                var ID ="@dt.Rows[0]["ID"].ToString()";
+                //alert(ID);
+            // layer.msg('dajiahoa!');
+            layer.open({
+                type: 2,//1：html；2调用页面
+                title: '新增跟进记录',
+                //content: '<div style="padding: 20px;">放入任意HTML</div>',//1:自定义html
+                content: '/Law/AddCaseProgress?ID='+ID,//2：不允许出现滚动条
+                //content: ['<?= $this->url('settle: eject')?>', 'no'],//不允许出现滚动条
+                area: ['500px', '505px'],//645px
+                end: function () {
+                    $(".layui-laypage-btn")[0].click();//刷新当前页
+                }
+            });
+        });
+
+    });
+
+
+    $('#btnAlert').on('click', function () {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+                var ID ="@dt.Rows[0]["ID"].ToString()";
+                //alert(ID);
+            // layer.msg('dajiahoa!');
+            layer.open({
+                type: 2,//1：html；2调用页面
+                title: '新增结案跟进记录',
+                //content: '<div style="padding: 20px;">放入任意HTML</div>',//1:自定义html
+                content: '/Law/AddL?ID='+ID,//2：不允许出现滚动条
+                //content: ['<?= $this->url('settle: eject')?>', 'no'],//不允许出现滚动条
+                area: ['500px', '505px'],//645px
+                end: function () {
+                    $(".layui-laypage-btn")[0].click();//刷新当前页
+                }
+            });
+        });
+
+    });
+
+
+    $('#btnreset').on('click', function () {
+        layui.use('layer', function () {
+            var layer = layui.layer;
+                var ID ="@dt.Rows[0]["ID"].ToString()";
+                //alert(ID);
+            // layer.msg('dajiahoa!');
+            layer.open({
+                type: 2,//1：html；2调用页面
+                title: '新增任务跟进记录',
+                //content: '<div style="padding: 20px;">放入任意HTML</div>',//1:自定义html
+                content: '/Law/AddForm?ID='+ID,//2：不允许出现滚动条
+                //content: ['<?= $this->url('settle: eject')?>', 'no'],//不允许出现滚动条
+                area: ['500px', '505px'],//645px
+                end: function () {
+                    $(".layui-laypage-btn")[0].click();//刷新当前页
+                }
+            });
+        });
+
+    });
+
+
+
+    //下载
+    function DownLode(url, name, format) {
+        var a = document.createElement("a");
+        a.download = name + format;
+        a.href = url;
+        $("body").append(a); // 修复firefox中无法触发click
+        a.click();
+        $(a).remove();
+    }
+</script>
+
+<script>
+
+    function FormDate(str, fmt) { //str: 日期字符串；fmt:格式类型
+        if (str == null || str == '') {
+            return "";
+        }
+        var date = eval('new ' + str.substr(1, str.length - 2)); //截取字符串之后：Date(1572490889017)
+        var o = {
+            "M+": date.getMonth() + 1, //月份
+            "d+": date.getDate(), //日
+            "H+": date.getHours(), //小时
+            "m+": date.getMinutes(), //分
+            "s+": date.getSeconds(), //秒
+            "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+            "S": date.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+</script>

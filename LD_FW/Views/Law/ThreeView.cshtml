@@ -1,0 +1,453 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+<link href="~/layuiadmin/layui/css/layui.css" rel="stylesheet" />
+<script src="~/layuiadmin/layui/layui.js"></script>
+
+
+<style>
+    /*.layui-fluid {
+            padding: 15px 15px 80px 15px;
+        }*/
+
+    .site-demo-button div {
+        margin: 20px 30px 10px;
+    }
+
+    .layui-elem-field legend {
+        margin-left: 20px;
+        padding: 0 10px;
+        font-size: 14px;
+        font-weight: 300;
+    }
+
+    .layui-card-header {
+        height: 42px;
+        line-height: 42px;
+        padding: 0 15px;
+        border-bottom: 1px solid #f6f6f6;
+        color: #333;
+        border-radius: 2px 2px 0 0;
+        font-size: 14px;
+        font-weight: bolder;
+        border-left: 5px solid #2196F3;
+        border-radius: 0 2px 2px 0;
+    }
+
+    /*.layui-form-label {
+            float: left;
+            display: block;
+            padding: 9px 15px;
+            font-weight: 400;
+            line-height: 5px;
+            width: 160px;
+            text-align: right;
+            background-color: #e8e8e8;
+        }*/
+
+    .layui-form-label {
+        float: left;
+        display: block;
+        padding: 9px 14px;
+        font-weight: 400;
+        line-height: 18px;
+        /*border: 1px solid;*/
+        border-color: #e6e6e6;
+        width: 160px;
+        text-align: right;
+        /*background-color: #FBFBFB;*/
+        font-weight: bold;
+    }
+
+    .layui-form-item {
+        margin-bottom: 0px;
+        clear: both;
+        border-bottom: solid 1px #dedede;
+        *zoom: 1;
+    }
+
+    .layui-layout-admin .layui-footer {
+        background-color: #fff;
+    }
+
+
+    .layui-form-item .layui-inline {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        margin-right: 10px;
+    }
+
+    .layui-input, .layui-select, .layui-textarea {
+        border-style: inherit;
+        background-color: #edfbf4;
+    }
+
+    .layui-inline span em {
+        padding-left: 5px;
+    }
+</style>
+
+
+<div class="layui-fluid">
+    <div class="layui-card">
+        @{
+          
+          
+
+        <div id="ssbq">
+            <div class="layui-card-header">诉讼保全信息</div>
+            <table id="lawList1" class="layui-table" lay-filter="lawList1"></table>
+        </div>
+
+            <div class="layui-card-header">解决方案/跟进记录</div>
+            <div class="layui-card-body" style="padding: 15px;">
+
+                <form class="layui-form" action="" lay-filter="component-form-group">
+
+                    <div class="layui-form-item" id="rwgj">
+                        <div class="layui-inline">
+                            <table id="lawList" class="layui-table" lay-filter="lawList"></table>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item" id="cggj">
+                        <div class="layui-inline">
+                            <table id="lawList2" class="layui-table" lay-filter="lawList2"></table>
+                        </div>
+                    </div>
+
+                    <div class="layui-form-item layui-layout-admin">
+                        <div class="layui-input-block">
+                            <div class="layui-footer" style="left: 0;">
+
+                                <button id="btnPage" class="layui-btn layui-btn-normal" data-type="test5" type="button"><i class="layui-icon layui-icon-add-1 layuiadmin-button-btn"></i>确认</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        }
+    </div>
+</div>
+
+
+<script>
+    var type = getQueryVariable("type");//类型
+    var userid = getQueryVariable("id");//用户id
+    var IDs = getQueryVariable("ids");//主键
+    var porid = getQueryVariable("procid");//待办id
+        if (type == "BQ") {
+
+            $("#rwgj").hide();
+            $("#cggj").hide();
+        }
+        else if (type == "RW") {
+            $("#ssbq").hide();
+            $("#cggj").hide();
+    }
+        else {
+            $("#rwgj").hide();
+            $("#ssbq").hide();
+        }
+
+        ////同时绑定页面多个日期控件
+        //lay('.test-item').each(function () {
+        //    laydate.render({
+        //        elem: this
+        //        , trigger: 'click'
+        //        , min: '2021-07-01'
+        //        , max: '2021-08-31'
+        //    })
+
+        //});
+
+
+        function getQueryVariable(variable) {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) { return pair[1]; }
+            }
+            return (false);
+        }
+
+
+
+        layui.use(['form', 'layedit', 'laydate', 'table'], function () {
+            var form = layui.form
+                , layer = layui.layer
+                , layedit = layui.layedit
+                , laydate = layui.laydate
+                , table = layui.table;
+            var myDate = new Date();
+            var a = myDate.toLocaleDateString();
+       
+
+            @*alert('@Convert.ToDateTime(ViewData["dtLitig"].ToString()).ToString("yyyy-MM-dd")');*@
+
+
+            //同时绑定页面多个日期控件
+            lay('.test-item').each(function () {
+                laydate.render({
+                    elem: this
+                    , min: a
+                    , max: '@Convert.ToDateTime(ViewData["dtLitig"].ToString()).ToString("yyyy-MM-dd")'
+                    , trigger: 'click'
+                });
+            });
+
+
+            //激活事件
+            var activeByType = function (type, arg) {
+                if (arguments.length === 2) {
+                    active[type] ? active[type].call(this, arg) : '';
+                } else {
+                    active[type] ? active[type].call(this) : '';
+                }
+            }
+            //注册按钮事件
+            $('.layui-btn[data-type]').on('click', function () {
+                var type = $(this).data('type');
+                activeByType(type);
+            });
+
+            //定义事件集合
+            var layTableId = "dataTable";
+            var active = {
+
+                updateRow: function (obj) {
+
+                    var oldData = table.cache[layTableId];
+                    console.log(oldData);
+                    for (var i = 0, row; i < oldData.length; i++) {
+                        row = oldData[i];
+                        if (row.tempId == obj.tempId) {
+                            $.extend(oldData[i], obj);
+                            return;
+                        }
+                    }
+                    tableIns.reload({
+                        data: oldData
+                    });
+                },
+
+                save: function () {
+                    var oldData = table.cache[layTableId];
+                    console.log(oldData);
+                    for (var i = 0, row; i < oldData.length; i++) {
+                        row = oldData[i];
+                        if (!row.type) {
+                            layer.msg("检查每一行，请选择分类！", { icon: 5 }); //提示
+                            return;
+                        }
+                    }
+                    //  document.getElementById("jsonResult").innerHTML = JSON.stringify(table.cache[layTableId], null, 2);	//使用JSON.stringify() 格式化输出JSON字符串
+                }
+            }
+
+           
+            table.render({
+                elem: '#lawList1'
+                , id: layTableId
+                //, skin: 'line' //行边框风格
+                , even: false //开启隔行背景
+                , url: '/Law/SelectThree?ID=' + IDs
+                //, toolbar: '#toolbarDemo'
+                , title: '诉讼保全'
+                , loading: true
+                , totalRow: true
+                , cols: [[ //标题栏
+                    { type: Number, title: '序号', width: 80, sort: true }
+                    , { field: 'Applicant', title: '申请人', width: 100, sort: true }
+                    , { field: 'Respondent', title: '被申请人', width: 100, sort: true }
+                    , { field: 'LPCourt', title: '保全法院', width: 180, sort: true }
+                    , { field: 'LPDate', title: '保全日期', width: 120, sort: true, templet: '<div>{{ FormDate(d.LPDate, "yyyy-MM-dd") }}</div>'}
+                    , { field: 'PCost', title: '保全金额', width: 180, sort: true }
+                    , { field: 'PInformation', title: '保全资产信息', minWidth: 140, sort: true }
+                    , { field: 'ModifyDate', title: '推迟时间', width: 180, edit: 'text', sort: true, event: 'editLCPaymentDate', templet: '<div>{{ FormDate(d.ModifyDate, "yyyy-MM-dd") }}</div>' }
+                    //, { title: '操作', toolbar: '#barDemo', align: 'center', fixed: 'right', width: 180 }
+                ]]
+                , page: false //是否显示分页
+                , limits: [10, 20, 50]
+                , limit: 10 //每页默认显示的数量
+            });
+
+            //监听工具条
+            //诉讼保全信息
+            table.on('tool(lawList1)', function (obj) {
+                var data = obj.data, event = obj.event, tr = obj.tr; //获得当前行 tr 的DOM对象;
+                console.log(data);
+                switch (event) {
+
+                    case "editLCPaymentDate":
+                        var field = $(this).data('field');
+                        laydate.render({
+                            elem: this.firstChild
+                            , show: true //直接显示
+                               , min: a
+                                , max: '@Convert.ToDateTime(ViewData["dtLitig"].ToString()).ToString("yyyy-MM-dd")'
+                            , closeStop: this
+                            , btns: ['clear', 'confirm']
+                            , done: function (value, date) {
+                                data[field] = value;
+                                $.extend(obj.data, { 'ModifyDate': value })
+                                activeByType('updateRow', obj.data);	//更新行记录对象
+                            }
+                        });
+                        break;
+
+                }
+            });
+
+
+                ////展示已知数据
+
+            table.render({
+                elem: '#lawList'
+           
+                , even: true //开启隔行背景
+                , url: '/Law/FollowUpRW'
+                //, toolbar: '#toolbarDemo'
+                , title: '案件详情'
+                , loading: true
+                , totalRow: true
+                , cols: [[ //标题栏
+                    { type: 'numbers', title: '序号' }
+                    , { field: 'FollowUpDate', title: '跟进时间', width: 140, sort: true, templet: '<div>{{ FormDate(d.FollowUpDate, "yyyy-MM-dd") }}</div>' }
+                    , { field: 'FUStatus', title: '跟进状态', width: 120 }
+                    , { field: 'PersonFollowUp', title: '跟进人', width: 120 }
+                    , { field: 'FollowUpInfo', title: '跟进情况', minwidth: 430 }
+                    , { field: 'LawType', title: '跟进来源', minwidth: 150 }
+                    //, { field: 'PersonLiable', title: '责任人', Width: 120 }
+                    , { field: 'NextDate', title: '下一次跟进时间', width: 140, templet: '<div>{{ FormDate(d.NextDate, "yyyy-MM-dd") }}</div>'}
+
+
+                    //, { field: 'FilingDate', title: '立案时间', width: 80, sort: true, templet: '<div>{{ FormDate(d.FilingDate, "yyyy-MM-dd HH:mm:ss") }}</div>' }
+                    //, { field: 'AmountInvolved', title: '涉案金额', width: 80 }
+                    //, { field: 'times', title: '红绿灯', width: 100, align: 'center', sort: true, templet: '#sexTpl' }
+                    //, { title: '操作', toolbar: '#barDemo', align: 'center', fixed: 'right', width: 180 }
+                ]]
+                , page: true //是否显示分页
+               , limits: [10, 20, 50]
+                , limit: 10 //每页默认显示的数量
+            });
+
+            table.render({
+                elem: '#lawList2'
+
+                , even: true //开启隔行背景
+                , url: '/Law/Threeall'
+                //, toolbar: '#toolbarDemo'
+                , title: '案件详情'
+                , loading: true
+                , totalRow: true
+                , cols: [[ //标题栏
+                    { type: 'numbers', title: '序号' }
+                    , { field: 'FollowUpDate', title: '跟进时间', width: 140, sort: true, templet: '<div>{{ FormDate(d.FollowUpDate, "yyyy-MM-dd") }}</div>' }
+                    , { field: 'FUStatus', title: '跟进状态', width: 120 }
+                    , { field: 'PersonFollowUp', title: '跟进人', width: 120 }
+                    , { field: 'FollowUpInfo', title: '跟进情况', minwidth: 430 }
+                    , { field: 'LawType', title: '跟进来源', minwidth: 150 }
+                    //, { field: 'PersonLiable', title: '责任人', Width: 120 }
+                    , { field: 'NextDate', title: '下一次跟进时间', width: 140, templet: '<div>{{ FormDate(d.NextDate, "yyyy-MM-dd") }}</div>' }
+
+
+                    //, { field: 'FilingDate', title: '立案时间', width: 80, sort: true, templet: '<div>{{ FormDate(d.FilingDate, "yyyy-MM-dd HH:mm:ss") }}</div>' }
+                    //, { field: 'AmountInvolved', title: '涉案金额', width: 80 }
+                    //, { field: 'times', title: '红绿灯', width: 100, align: 'center', sort: true, templet: '#sexTpl' }
+                    //, { title: '操作', toolbar: '#barDemo', align: 'center', fixed: 'right', width: 180 }
+                ]]
+                , page: true //是否显示分页
+                , limits: [10, 20, 50]
+                , limit: 10 //每页默认显示的数量
+            });
+
+            laydate.render({
+                elem: '#lawList1'
+                , done: function (value, date, endDate) {
+                    
+                    console.log(value); //得到日期生成的值，如：2017-08-18
+                    console.log(date); //得到日期时间对象：{year: 2017, month: 8, date: 18, hours: 0, minutes: 0, seconds: 0}
+                    console.log(endDate); //得结束的日期时间对象，开启范围选择（range: true）才会返回。对象成员同上。
+                }
+            });
+
+            //var type = getQueryVariable("type");//类型
+            //var userid = getQueryVariable("id");//用户id
+            //var IDs = getQueryVariable("ids");//主键
+            //var porid = getQueryVariable("procid");//待办id
+            $('#btnPage').on('click', function () {
+                
+                var oldData1 = table.cache[layTableId];
+                console.log(oldData1);
+                var ID = "";
+                var time = "";
+                //console.log(oldData1[0].ModifyDate);
+                if (type=="BQ") {
+                    ID = oldData1[0].ID;
+                    time = oldData1[0].ModifyDate;
+                }
+                
+              
+                $.ajax({
+                    url: '/Law/Updatetime?ID=' + ID + '&time=' + time + "&type=" + type + "&userid=" + userid + "&porid="+porid,
+                    dataType: 'json',
+                    type: 'get',
+                    async: false,
+                    success: function (data) {
+                        console.log(data);
+                        if (data == 1) {
+                            alert("处理成功!");
+                        }
+                        else {
+                            alert("处理失败!");
+                        }
+                       
+
+                    }
+                });
+
+            });
+
+        });
+
+
+</script>
+
+<script>
+    function FormDate(str, fmt) { //str: 日期字符串；fmt:格式类型
+        if (str == null || str == '') {
+            return "";
+        }
+        var date = eval('new ' + str.substr(1, str.length - 2)); //截取字符串之后：Date(1572490889017)
+        var o = {
+            "M+": date.getMonth() + 1, //月份
+            "d+": date.getDate(), //日
+            "H+": date.getHours(), //小时
+            "m+": date.getMinutes(), //分
+            "s+": date.getSeconds(), //秒
+            "q+": Math.floor((date.getMonth() + 3) / 3), //季度
+            "S": date.getMilliseconds() //毫秒
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
